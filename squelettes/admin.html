@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+	<title>[(#NOM_SITE_SPIP|textebrut)][ - (#SLOGAN_SITE_SPIP|textebrut)]</title>
+	[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|attribut_html)" />]
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+</head>
+<body>
+
+<BOUCLE_amap(AMAPS){id_amap=#ID_AMAP}>
+
+<div class="wrapper">
+
+
+	<div class="col-left">
+	<h2><a href="">#NOM</a></h2>
+
+	<hr/>
+
+	[(#INCLURE{fond=inc/liste_adherents, env})]
+
+	<hr/>
+
+	<form method="post" action="[(#SELF|parametre_url{id_adherent, ""}|url_absolue)]"><button type="submit">Ajouter un adhérent</button></form>
+
+	</div>
+
+
+	<div class="col-right">
+
+	[(#FORMULAIRE_EDITER_ADHERENT{#ENV{id_adherent,oui}, #ID_AMAP, #SELF})]
+
+	</div>
+
+</div>
+
+</BOUCLE_amap>
+
+<style>
+
+body {
+	padding-top: 100px;
+}
+.wrapper {
+	/* width: 960px; */
+	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+}
+
+.col-left {
+	width: 400px;
+	margin-right: 20px;
+}
+.col-right {
+	flex: 1;
+}
+
+tr.on {
+	border-right: 2px solid #0076d1;
+	font-weight: bold;
+}
+
+/* FORM */
+
+</style>
+
+</body>
+</html>

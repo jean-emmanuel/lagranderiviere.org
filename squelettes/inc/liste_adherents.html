@@ -1,0 +1,40 @@
+[(#SET{defaut_tri,#ARRAY{
+	nom,1,
+	id_adherent,1,
+	points,-1
+}})]
+<B_liste_adherents>
+<table class="liste-adherents">
+	<tbody>
+		<thead>
+			<tr class="first_row">
+				<th class="nom" scope="col">
+					[(#TRI_LISTE_ADHERENTS|!={nom}|oui)<a href="[(#SELF|parametre_url{tri_liste_adherents, nom})]#admin">]
+						<:adherent:champ_nom_label:>
+					[(#TRI_LISTE_ADHERENTS|!={nom}|oui)</a>]
+				</th>
+				<th class="date" scope="col" style="width:100px">
+					[(#TRI_LISTE_ADHERENTS|!={date_debut}|oui)<a href="[(#SELF|parametre_url{tri_liste_adherents, date_debut})]#admin">]
+						<:adherent:champ_date_debut_label:>
+					[(#TRI_LISTE_ADHERENTS|!={date_debut}|oui)</a>]
+			</tr>
+		</thead>
+	<BOUCLE_liste_adherents(ADHERENTS){tout}{id_amap?}{tri #ENV{par nom},#GET{defaut_tri}}{inverse #ENV{senstri}}{par nom}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})] [(#EXPOSE|oui)on]">
+			<td class="nom principale">
+				<a href="[(#SELF|parametre_url{id_adherent,#ID_ADHERENT})]#admin">
+					#NOM
+				</a>
+			</td>
+			<td class="date" >
+				<a href="[(#SELF|parametre_url{id_adherent,#ID_ADHERENT})]#admin">
+					[(#DATE_DEBUT|affdate{d/m/Y})]
+				</a>
+			</td>
+		</tr>
+	</BOUCLE_liste_adherents>
+	</tbody>
+</table>
+</B_liste_adherents>
+<p> Aucun adhérent</p>
+<//B_liste_adherents>

@@ -1,0 +1,94 @@
+#SET{id_amap, 0}
+
+<div class="admin-head" id="admin">
+	<label>Administration: </label>
+	<B_amap_select>
+	<form method="get" action="#SELF#admin">
+		<select name="id_amap" onchange="if (this.value) window.location.href='[(#SELF|parametre_url{id_adherent, ''}|parametre_url{ajouter_adherant, ''}|parametre_url{id_amap, ID_AMAP})]#admin'.replace('ID_AMAP', this.value)" [(#TOTAL_BOUCLE|>{1}|non)disabled]>
+			[(#SESSION{statut}|=={0minirezo}|oui)<option value="0" [(#ID_AMAP|=={0}|oui)selected]>INTER-AMAP</option>]
+		<BOUCLE_amap_select(AMAPS){id_auteur}>
+			<option [(#EXPOSE|oui)selected] value="#ID_AMAP">#NOM</option>
+			[(#EXPOSE|ou{#TOTAL_BOUCLE|=={1}}|oui)#SET{id_amap, #ID_AMAP}]
+		</BOUCLE_amap_select>
+		<input type="submit" value="Ok" id="admin-head-submit"/>
+		<noscript><style>#admin-head-submit{display:block!important;}</style></noscript>
+		</select>
+	</form>
+	[(#TOTAL_BOUCLE|=={1}|oui)<style>.editer_id_amap {display: none!important;}</style>]
+	</B_amap_select>
+	<div class="spacer"></div>
+	<a style="font-weight: normal; float: right" class="" href="[(#URL_LOGOUT{#SELF|parametre_url{id_amap, ''}|parametre_url{id_adherent, ''}|parametre_url{ajouter_adherant, ''}})]">Déconnexion</a>
+</div>
+
+
+<BOUCLE_amap(AMAPS){id_amap=#GET{id_amap}}>
+
+<h2>
+	[(#ENV{id_adherent}|ou{#ENV{ajouter_adherant}}|oui)<a href="[(#SELF|parametre_url{id_adherent, ''}|parametre_url{ajouter_adherant, ''})]">]
+		AMAP #NOM
+		<span id="nb-adherents">
+			<BOUCLE_nb_adherents(ADHERENTS){id_amap}> </BOUCLE_nb_adherents>([(#GRAND_TOTAL|singulier_ou_pluriel{adherent:info_1_adherent,adherent:info_nb_adherents})])</B_nb_adherents>
+		</span>
+	[(#ENV{id_adherent}|ou{#ENV{ajouter_adherant}}|oui)</a>]
+</h2>
+
+<hr/><br/>
+
+<div class="admin-form">
+
+	<div class="col-left">
+
+	[(#INCLURE{fond=inc/liste_adherents, id_amap, env})]
+
+
+	<a class="button" href="[(#SELF|parametre_url{id_adherent, ''}|parametre_url{ajouter_adherant, oui})]#admin">Ajouter un adhérent</a>
+
+	</div>
+
+
+	<div class="col-right">
+	[(#ENV{id_adherent}|ou{#ENV{ajouter_adherant}}|oui)
+		[(#FORMULAIRE_EDITER_ADHERENT{#ENV{id_adherent, oui}, #ID_AMAP, #SELF#admin})]
+	]
+	[(#ENV{id_adherent}|ou{#ENV{ajouter_adherant}}|non)
+		[(#FORMULAIRE_EDITER_AMAP{#ID_AMAP, #SELF#admin})]
+	]
+
+
+	</div>
+
+</div>
+</BOUCLE_amap>
+
+
+<BOUCLE_interamap(ADHERENTS){si #SESSION{statut}|=={0minirezo}|oui}{si #GET{id_amap}|=={0}|oui}{0,1}>
+
+
+<h2>
+	INTER-AMAP
+	<span id="nb-adherents">
+		<BOUCLE_nb_adherents_i(ADHERENTS)> </BOUCLE_nb_adherents_i>([(#GRAND_TOTAL|singulier_ou_pluriel{adherent:info_1_adherent,adherent:info_nb_adherents})])</B_nb_adherents_i>
+	</span>
+</h2>
+
+<hr/><br/>
+
+<div class="admin-form">
+
+	<div class="col-left">
+
+		[(#INCLURE{fond=inc/liste_adherents, id_amap='', env})]
+
+		<a class="button" href="[(#SELF|parametre_url{id_adherent, ''}|parametre_url{ajouter_adherant, oui})]#admin">Ajouter un adhérent</a>
+
+	</div>
+
+	<div class="col-right">
+	[(#ENV{id_adherent}|ou{#ENV{ajouter_adherant}}|oui)
+		[(#FORMULAIRE_EDITER_ADHERENT{#ENV{id_adherent, oui}, 0, #SELF#admin})]
+	]
+	</div>
+
+</div>
+
+</BOUCLE_interamap>

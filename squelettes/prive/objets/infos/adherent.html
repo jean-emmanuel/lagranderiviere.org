@@ -1,0 +1,21 @@
+<BOUCLE_adherent(ADHERENTS){tout}{id_adherent=#ENV{id}}>
+<div class="infos">
+[(#SET{texte_objet,<:adherent:titre_adherent:>})]
+<!-- <div class="numero"><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_ADHERENT</p></div> -->
+
+	<div class='nb_elements'><!--nb_elements--></div>
+
+
+
+</div>
+
+<BOUCLE_amap(AMAPS){id_amap}>
+
+<h2><a href="#URL_ECRIRE{amap,id_amap=#ID_AMAP}" clas="ajax">#NOM</a></h2>
+<INCLURE{fond=prive/objets/liste/adherents, id_amap=#ID_AMAP, id_adherent=#ID_ADHERENT}>
+
+<a style="float:right" href="#URL_ECRIRE{adherent_edit,id_amap=#ID_AMAP}">Ajouter un adhérent</a>
+
+</BOUCLE_amap>
+
+</BOUCLE_adherent>

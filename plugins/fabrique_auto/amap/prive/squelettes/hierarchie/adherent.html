@@ -1,0 +1,10 @@
+<!-- hierarchie -->
+<a href="#URL_ECRIRE{adherents}"><:adherent:titre_adherents:></a>
+<BOUCLE_hierarchie(ADHERENTS){id_adherent}>
+&gt; [(#URL_ECRIRE{amap,id_amap=#ID_AMAP}|lien_ou_expose{#INFO_TITRE{amaps,#ID_AMAP},''})]
+&gt; <strong class="on">#NOM</strong>
+</BOUCLE_hierarchie>
+[(#ENV{id_amap}|oui)
+	&gt; [(#URL_ECRIRE{amap,id_amap=#ID_AMAP}|lien_ou_expose{#INFO_TITRE{amaps,#ID_AMAP},''})]
+]&gt; <strong class="on"><:ecrire:info_sans_titre:></strong>
+<//B_hierarchie>

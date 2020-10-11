@@ -1,0 +1,51 @@
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_amap.php ../plugins/fabrique_auto/.backup/amap/formulaires/editer_adherent.html ../plugins/fabrique_auto/amap/formulaires/editer_adherent.html
+47,49c47,48
+< 			[(#SAISIE{input, date_debut, obligatoire=oui,
+< 				label=<:adherent:champ_date_debut_label:>,
+< 				type=date})]
+---
+> 			[(#SAISIE{date, date_debut, obligatoire=oui,
+> 				label=<:adherent:champ_date_debut_label:>})]
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_amap.php ../plugins/fabrique_auto/.backup/amap/formulaires/editer_adherent.php ../plugins/fabrique_auto/amap/formulaires/editer_adherent.php
+103c103,118
+< 	$erreurs = formulaires_editer_objet_verifier('adherent', $id_adherent, array('nom', 'adresse', 'mail', 'telephone', 'taille_panier', 'date_debut', 'id_amap'));
+---
+> 	$verifier = charger_fonction('verifier', 'inc');
+>
+> 	foreach (array('date_debut') AS $champ) {
+> 		$normaliser = null;
+> 		if ($erreur = $verifier(_request($champ), 'date', array('normaliser'=>'datetime'), $normaliser)) {
+> 			$erreurs[$champ] = $erreur;
+> 		// si une valeur de normalisation a ete transmis, la prendre.
+> 		} elseif (!is_null($normaliser)) {
+> 			set_request($champ, $normaliser);
+> 		// si pas de normalisation ET pas de date soumise, il ne faut pas tenter d'enregistrer ''
+> 		} else {
+> 			set_request($champ, null);
+> 		}
+> 	}
+>
+> 	$erreurs += formulaires_editer_objet_verifier('adherent', $id_adherent, array('nom', 'adresse', 'mail', 'telephone', 'taille_panier', 'date_debut', 'id_amap'));
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_amap.php ../plugins/fabrique_auto/.backup/amap/paquet.xml ../plugins/fabrique_auto/amap/paquet.xml
+7c7
+< 	logo="prive/themes/spip/images/amap-64.png"
+---
+> 	logo=""
+12c12
+< 		Paquet généré le 2020-10-11 14:13:06
+---
+> 		Paquet généré le 2020-10-11 15:01:51
+22c22
+<
+---
+> 	<necessite nom="verifier" compatibilite="[1.0.6;]" />
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_amap.php ../plugins/fabrique_auto/.backup/amap/prive/objets/contenu/adherent.html ../plugins/fabrique_auto/amap/prive/objets/contenu/adherent.html
+37c37
+< [<div class="champ contenu_date_debut[ (#DATE_DEBUT*|strlen|?{'',vide})]">
+---
+> [<div class="champ contenu_date_debut[ (#DATE_DEBUT*|!={0000-00-00 00:00:00}|?{'',vide})]">
+39c39
+< 	<span dir="#LANG_DIR" class="#EDIT{date_debut} date_debut">(#DATE_DEBUT)</span>
+---
+> 	<span dir="#LANG_DIR" class="#EDIT{date_debut} date_debut">(#DATE_DEBUT|=={0000-00-00 00:00:00}|?{'',[(#DATE_DEBUT|affdate)]})</span>
+Only in ../plugins/fabrique_auto/.backup/amap/prive: themes

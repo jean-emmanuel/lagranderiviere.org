@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/adherents, env, ajax, sinon=<:adherent:info_aucun_adherent:>}>
+
+[(#AUTORISER{creer,adherent})
+	[(#URL_ECRIRE{adherent_edit,new=oui}|icone_verticale{<:adherent:icone_creer_adherent:>,adherent,new,right})]
+]

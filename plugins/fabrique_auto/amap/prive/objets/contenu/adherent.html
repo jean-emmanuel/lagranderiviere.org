@@ -1,0 +1,42 @@
+<BOUCLE_adherent(ADHERENTS){id_adherent}>
+[<div class="champ contenu_nom[ (#NOM*|strlen|?{'',vide})]">
+	<label><:adherent:champ_nom_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{nom} nom">(#NOM)</span>
+</div>]
+
+[<div class="champ contenu_adresse[ (#ADRESSE*|strlen|?{'',vide})]">
+	<label><:adherent:champ_adresse_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{adresse} adresse">(#ADRESSE)</span>
+</div>]
+
+[<div class="champ contenu_mail[ (#MAIL*|strlen|?{'',vide})]">
+	<label><:adherent:champ_mail_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{mail} mail">(#MAIL)</span>
+</div>]
+
+[<div class="champ contenu_telephone[ (#TELEPHONE*|strlen|?{'',vide})]">
+	<label><:adherent:champ_telephone_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{telephone} telephone">(#TELEPHONE)</span>
+</div>]
+
+[<div class="champ contenu_taille_panier[ (#TAILLE_PANIER*|strlen|?{'',vide})]">
+	<label><:adherent:champ_taille_panier_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{taille_panier} taille_panier">(#TAILLE_PANIER)</span>
+</div>]
+
+[<div class="champ contenu_demi_panier[ (#DEMI_PANIER*|strlen|?{'',vide})]">
+	<label><:adherent:champ_demi_panier_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{demi_panier} demi_panier">(#DEMI_PANIER)</span>
+</div>]
+
+[<div class="champ contenu_notes[ (#NOTES*|strlen|?{'',vide})]">
+	<label><:adherent:champ_notes_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{notes} notes">(#NOTES)</span>
+</div>]
+
+[<div class="champ contenu_date_debut[ (#DATE_DEBUT*|!={0000-00-00 00:00:00}|?{'',vide})]">
+	<label><:adherent:champ_date_debut_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{date_debut} date_debut">(#DATE_DEBUT|=={0000-00-00 00:00:00}|?{'',[(#DATE_DEBUT|affdate)]})</span>
+</div>]
+
+</BOUCLE_adherent>

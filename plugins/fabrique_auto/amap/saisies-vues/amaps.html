@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_amaps_selectionnes>
+	<ul>
+	<BOUCLE_amaps_selectionnes(AMAPS){id_amap IN #GET*{valeur}}
+		{par num nom, nom}{tout}>
+		<li class="choix">#NOM (#ID_AMAP)</li>
+	</BOUCLE_amaps_selectionnes>
+	</ul>
+	</B_amaps_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_amaps_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_amap_selectionne(AMAPS){id_amap=#ENV{valeur}}
+		{par num nom, nom}{tout}>
+	  	<p>#NOM (#ID_AMAP)</p>
+	</BOUCLE_amap_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_amap_selectionne>
+<//B_test_multiple>

@@ -1,0 +1,56 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_adherent,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_adherent" value="#ENV{id_adherent}" />
+		<div class="editer-groupe">
+
+			[(#SAISIE{input, nom, obligatoire=oui,
+				label=<:adherent:champ_nom_label:>,
+				explication=<:adherent:champ_nom_explication:> })]
+
+			[(#SAISIE{amaps, id_amap, obligatoire=oui,
+				label=<:amap:titre_amap:>})]
+
+
+			[(#SAISIE{textarea, adresse, obligatoire=oui,
+				label=<:adherent:champ_adresse_label:>,
+				explication=<:adherent:champ_adresse_explication:> ,
+				rows=2})]
+
+			[(#SAISIE{input, mail, obligatoire=oui,
+				label=<:adherent:champ_mail_label:>,
+				explication=<:adherent:champ_mail_explication:> ,
+				type=email})]
+
+			[(#SAISIE{input, telephone, obligatoire=oui,
+				label=<:adherent:champ_telephone_label:>,
+				explication=<:adherent:champ_telephone_explication:> ,
+				type=telephone})]
+
+			[(#SAISIE{selection, taille_panier, obligatoire=oui,
+				label=<:adherent:champ_taille_panier_label:>,
+				datas=[(#ARRAY{petit,petit,moyen,moyen,grand,grand})]})]
+
+			[(#SAISIE{oui_non, demi_panier,
+				label=<:adherent:champ_demi_panier_label:>,
+				explication=<:adherent:champ_demi_panier_explication:> ,
+				datas=[(#ARRAY{0,oui,1,non})]})]
+
+			[(#SAISIE{textarea, notes,
+				label=<:adherent:champ_notes_label:>,
+				rows=4})]
+
+			[(#SAISIE{date, date_debut, obligatoire=oui,
+				label=<:adherent:champ_date_debut_label:>})]
+
+		</div>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+	]
+</div>

@@ -1,0 +1,16 @@
+<BOUCLE_adherent(ADHERENTS){id_adherent=#ENV{id}}>
+<div class="infos">
+[(#SET{texte_objet,<:adherent:titre_adherent:>})]
+<div class="numero"><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_ADHERENT</p></div>
+
+	<div class='nb_elements'><!--nb_elements--></div>
+
+	[(#AUTORISER{supprimer, adherent, #ID_ADHERENT}|oui)
+		[(#BOUTON_ACTION{
+			[(#CHEMIN_IMAGE{adherent-del-24.png}|balise_img{<:adherent:supprimer_adherent:>}|concat{' ',#VAL{<:adherent:supprimer_adherent:>}|wrap{<b>}}|trim)],
+			#URL_ACTION_AUTEUR{supprimer_adherent, #ID_ADHERENT, #URL_ECRIRE{adherents}},
+			icone s24 horizontale danger adherent-del-24, <:adherent:confirmer_supprimer_adherent:>})]
+	]
+
+</div>
+</BOUCLE_adherent>

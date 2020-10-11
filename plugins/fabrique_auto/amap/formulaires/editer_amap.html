@@ -1,0 +1,41 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_amap,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_amap" value="#ENV{id_amap}" />
+		<div class="editer-groupe">
+
+			[(#SAISIE{input, nom, obligatoire=oui,
+				label=<:amap:champ_nom_label:>,
+				explication=<:amap:champ_nom_explication:> })]
+
+			[(#SAISIE{textarea, adresse, obligatoire=oui,
+				label=<:amap:champ_adresse_label:>,
+				explication=<:amap:champ_adresse_explication:> ,
+				rows=2})]
+
+			[(#SAISIE{input, nom_referent, obligatoire=oui,
+				label=<:amap:champ_nom_referent_label:>,
+				explication=<:amap:champ_nom_referent_explication:> })]
+
+			[(#SAISIE{input, telephone_referent, obligatoire=oui,
+				label=<:amap:champ_telephone_referent_label:>,
+				explication=<:amap:champ_telephone_referent_explication:> })]
+
+			[(#SAISIE{input, mail_referent, obligatoire=oui,
+				label=<:amap:champ_mail_referent_label:>,
+				explication=<:amap:champ_mail_referent_explication:> })]
+
+			[(#SAISIE{input, livraison, obligatoire=oui,
+				label=<:amap:champ_livraison_label:>})]
+
+		</div>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+	]
+</div>

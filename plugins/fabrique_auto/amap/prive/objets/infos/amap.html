@@ -1,0 +1,16 @@
+<BOUCLE_amap(AMAPS){id_amap=#ENV{id}}>
+<div class="infos">
+[(#SET{texte_objet,<:amap:titre_amap:>})]
+<div class="numero"><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_AMAP</p></div>
+
+	<div class='nb_elements'><!--nb_elements--></div>
+
+	[(#AUTORISER{supprimer, amap, #ID_AMAP}|oui)
+		[(#BOUTON_ACTION{
+			[(#CHEMIN_IMAGE{amap-del-24.png}|balise_img{<:amap:supprimer_amap:>}|concat{' ',#VAL{<:amap:supprimer_amap:>}|wrap{<b>}}|trim)],
+			#URL_ACTION_AUTEUR{supprimer_amap, #ID_AMAP, #URL_ECRIRE{amaps}},
+			icone s24 horizontale danger amap-del-24, <:amap:confirmer_supprimer_amap:>})]
+	]
+
+</div>
+</BOUCLE_amap>

@@ -1,0 +1,37 @@
+<paquet
+	prefix="amap"
+	categorie="divers"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.2.8;3.2.*]"
+	logo=""
+	documentation=""
+	schema="1.0.0" 
+>
+	<!--
+		Paquet généré le 2020-10-11 15:01:51
+	-->
+
+	<nom>Amap</nom>
+	<!-- Gestion des adhérents pour les AMAP -->
+
+	<auteur>Jean-Emmanuel Doucet</auteur>
+
+	<licence>GNU/GPL v3</licence>
+	<necessite nom="saisies" compatibilite="[3.23.2;]" /> 
+	<necessite nom="verifier" compatibilite="[1.0.6;]" /> 
+
+	<pipeline nom="autoriser" inclure="amap_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/amap.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/amap.php" /> 
+	<pipeline nom="affiche_enfants" inclure="amap_pipelines.php" /> 
+	<pipeline nom="affiche_milieu" inclure="amap_pipelines.php" /> 
+	<pipeline nom="boite_infos" inclure="amap_pipelines.php" /> 
+	<pipeline nom="objet_compte_enfants" inclure="amap_pipelines.php" /> 
+
+	<menu nom="amaps" titre="amap:titre_amaps" parent="menu_edition" icone="images/amap-16.png" action="amaps" /> 
+	<menu nom="amap_creer" titre="amap:icone_creer_amap" parent="outils_rapides" icone="images/amap-new-16.png" action="amap_edit" parametres="new=oui" /> 
+	<menu nom="adherents" titre="adherent:titre_adherents" parent="menu_edition" icone="images/adherent-16.png" action="adherents" /> 
+	<menu nom="adherent_creer" titre="adherent:icone_creer_adherent" parent="outils_rapides" icone="images/adherent-new-16.png" action="adherent_edit" parametres="new=oui" /> 
+</paquet>

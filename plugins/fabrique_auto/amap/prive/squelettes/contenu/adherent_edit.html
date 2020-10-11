@@ -1,0 +1,36 @@
+[(#ID_ADHERENT|oui)
+	[(#AUTORISER{modifier,adherent,#ID_ADHERENT}|sinon_interdire_acces)]
+	[(#SET{id_parent,#INFO_ID_AMAP{adherent,#ID_ADHERENT}})]
+]
+
+[(#ID_ADHERENT|non)
+	#SET{id_parent,#ENV{id_amap,#ENV{id_parent}}}
+	[(#GET{id_parent}|non|ou{[(#AUTORISER{creeradherentdans, amap, #GET{id_parent}})]}|sinon_interdire_acces)]
+]
+
+#SET{redirect,#ENV{redirect}|sinon{#ID_ADHERENT|?{#ID_ADHERENT|generer_url_entite{adherent},#GET{id_parent}|?{#GET{id_parent}|generer_url_entite{amap},#URL_ECRIRE{amaps}}}}}
+
+
+
+<div class="cadre-formulaire-editer">
+<div class="entete-formulaire">
+	[(#ID_ADHERENT|oui)
+	[(#GET{redirect}|icone_verticale{<:icone_retour:>,adherent,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#ID_ADHERENT|?{<:adherent:icone_modifier_adherent:>,<:adherent:icone_creer_adherent:>})]
+		<h1>(#ENV{titre,#INFO_NOM{adherent,#ID_ADHERENT}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_ADHERENT|generer_url_entite{adherent}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_ADHERENT{#ENV{id_adherent,oui}, #GET{id_parent}, #GET{redirect}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+]
+</div>

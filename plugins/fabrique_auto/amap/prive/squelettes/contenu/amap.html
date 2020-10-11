@@ -1,0 +1,56 @@
+[(#AUTORISER{voir,amap,#ID_AMAP}|sinon_interdire_acces)]
+[(#SET{url_voir,#VAL{amap}|objet_info{url_voir}})]
+[(#SET{url_edit,#VAL{amap}|objet_info{url_edit}})]
+<BOUCLE_amap(AMAPS){id_amap}{si #ENV{exec}|=={#GET{url_voir}}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,amap,#ID_AMAP})
+		[(#ID_AMAP|afficher_qui_edite{amap}|non)
+			[(#URL_ECRIRE{#GET{url_edit},id_amap=#ID_AMAP}|icone_verticale{<:amap:icone_modifier_amap:>,amap,edit,right ajax preload})]
+		]
+		[(#ID_AMAP|afficher_qui_edite{amap}|oui)
+			[(#URL_ECRIRE{#GET{url_edit},id_amap=#ID_AMAP}|icone_verticale{#ID_AMAP|afficher_qui_edite{amap},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#NOM|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{amap-24.png}|balise_img{amap,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{amap,#ID_AMAP}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/amap,id=#ID_AMAP,id_amap=#ID_AMAP,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,amap,#ID_AMAP})
+	[(#ID_AMAP|afficher_qui_edite{amap}|non)
+		[(#URL_ECRIRE{#GET{url_edit},id_amap=#ID_AMAP}|icone_verticale{<:amap:icone_modifier_amap:>,amap,edit,right ajax preload})]
+	]
+	[(#ID_AMAP|afficher_qui_edite{amap}|oui)
+		[(#URL_ECRIRE{#GET{url_edit},id_amap=#ID_AMAP}|icone_verticale{#ID_AMAP|afficher_qui_edite{amap},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,amap,id,#ID_AMAP},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+
+#SET{enfants,''}
+[(#VAL{prive/objets/contenu/amap-enfants}|trouver_fond|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/amap-enfants,id_amap,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,amap,id_amap,#ID_AMAP,objet,amap,id_objet,#ID_AMAP},data,#GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_amap>
+[(#ENV**{exec}|=={#GET{url_edit}}|?{#INCLURE{fond=prive/squelettes/contenu/#GET{url_edit},redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_amap>

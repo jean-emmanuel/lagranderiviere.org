@@ -1,5 +1,3 @@
-#INCLURE{fond=inc/head, env}
-
-#INCLURE{fond=inc/sommaire, env}
-
-#INCLURE{fond=inc/foot, env}
+<BOUCLE_rubrique_sommaire(RUBRIQUES){id_parent=0}{par num titre}{tout}{0,1}>
+#INCLURE{fond=rubrique, env, id_rubrique=#ID_RUBRIQUE, page=sommaire}
+</BOUCLE_rubrique_sommaire>

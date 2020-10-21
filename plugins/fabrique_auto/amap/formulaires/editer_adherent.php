@@ -115,7 +115,7 @@ function formulaires_editer_adherent_verifier_dist($id_adherent = 'new', $id_ama
 		}
 	}
 
-	$erreurs += formulaires_editer_objet_verifier('adherent', $id_adherent, array('nom', 'adresse', 'mail', 'telephone', 'taille_panier', 'date_debut', 'id_amap'));
+	$erreurs += formulaires_editer_objet_verifier('adherent', $id_adherent, array('nom', 'adresse', 'mail', 'telephone', 'taille_panier', 'mode_paiement', 'date_debut', 'contrat_ok', 'paiement_ok', 'id_amap'));
 
 	return $erreurs;
 }

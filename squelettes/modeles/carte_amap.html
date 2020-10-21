@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="[(#CHEMIN{css/leaflet.css})]" type="text/css">
+<script src="[(#CHEMIN{js/leaflet.js})]"></script>
+
+<div class="paragraph">
+    <div id="carte-amap"></div>
+</div>
+
+<div class="tabs" id="amap-tabs">
+    <BOUCLE_tablinks(AMAPS){par nom}>
+        <input type="radio" name="tabs" id="tab#COMPTEUR_BOUCLE" [(#COMPTEUR_BOUCLE|=={1}|oui)checked]>
+        <label for="tab#COMPTEUR_BOUCLE" data-marker='[(#NOM|textebrut|replace{"'", &#39})]'>
+            [(#NOM|textebrut)]
+        </label>
+    </BOUCLE_tablinks>
+        <label></label>
+    <BOUCLE_tabs(AMAPS){par nom}>
+        <div class="tab-content" id="tab-content#COMPTEUR_BOUCLE">
+            <p>
+                <b>AMAP : </b>
+                [(#NOM|textebrut)]
+            </p>
+
+            <p>
+                <b>Lieu de livraison des paniers : </b>
+                [(#ADRESSE|textebrut)]
+            </p>
+
+            <p>
+                <b>Date de livraison : </b>
+                [(#LIVRAISON|textebrut)]
+            </p>
+
+            <p>
+                <b>Contact du référent : </b>
+                #SET{mail,#VAL{referent-}|concat{#NOM_MAILINGLIST|textebrut}|concat{@}|concat{#CONFIG{amap_extra/ovh_domain}}}
+                <a href="mailto:#GET{mail}">#GET{mail}</a>
+            </p>
+
+        </div>
+    </BOUCLE_tabs>
+
+</div>
+
+
+<script>
+var map = L.map('carte-amap').setView([48.02, 0.199556], 10);
+
+// L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+//     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+// }).addTo(map);
+
+L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href= "http://cartodb.com/attributions#basemaps">CartoDB</a>',
+    // minNativeZoom: 12
+}).addTo(map);
+
+<BOUCLE_amap_markers(AMAPS){gps != ''}>
+L.marker([ #GPS ], {alt:'[(#NOM|textebrut|replace{"'", &#39})]'}).addTo(map)
+    .on('click', function(){
+        $('[data-marker="'+this._icon.getAttribute('alt')+ '"]').click()
+        $('.leaflet-marker-icon').removeClass('on')
+        $(this._icon).addClass('on')
+        $('#amap-tabs')[0].scrollIntoView({block: 'center', behavior: 'smooth'})
+    })
+
+</BOUCLE_amap_markers>
+
+$('[data-marker]').click(function(){
+    $('.leaflet-marker-icon').removeClass('on')
+    $('.leaflet-marker-icon[alt="'+$(this).attr('data-marker')+'"]').addClass('on')
+})
+$('.leaflet-marker-icon').first().addClass('on')
+</script>

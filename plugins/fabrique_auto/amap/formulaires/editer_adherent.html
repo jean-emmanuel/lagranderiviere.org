@@ -26,26 +26,100 @@
 				explication=<:adherent:champ_mail_explication:> ,
 				type=email})]
 
-			[(#SAISIE{input, telephone, obligatoire=oui,
+			[(#SAISIE{telephone, telephone, obligatoire=oui,
 				label=<:adherent:champ_telephone_label:>,
-				explication=<:adherent:champ_telephone_explication:> ,
-				type=telephone})]
+				explication=<:adherent:champ_telephone_explication:> })]
+
+			[(#SAISIE{adherents, coadherent,
+				label=<:adherent:champ_coadherent_label:>,
+				explication=<:adherent:champ_coadherent_explication:> })]
 
 			[(#SAISIE{selection, taille_panier, obligatoire=oui,
 				label=<:adherent:champ_taille_panier_label:>,
 				datas=[(#ARRAY{petit,petit,moyen,moyen,grand,grand})]})]
 
-			[(#SAISIE{oui_non, demi_panier,
-				label=<:adherent:champ_demi_panier_label:>,
-				explication=<:adherent:champ_demi_panier_explication:> ,
-				datas=[(#ARRAY{0,oui,1,non})]})]
+			[(#SAISIE{radio, tarif_solidaire,
+				label=<:adherent:champ_tarif_solidaire_label:>,
+				explication=<:adherent:champ_tarif_solidaire_explication:> ,
+				datas=[(#ARRAY{1,oui,0,non})]})]
+
+			[(#SAISIE{selection, mode_paiement, obligatoire=oui,
+				label=<:adherent:champ_mode_paiement_label:>,
+				datas=[(#ARRAY{cheque,cheque,espece,espece,virement,virement})], autocomplete=on, defaut=cheque})]
+
+			[(#SAISIE{date, date_debut, obligatoire=oui,
+				label=<:adherent:champ_date_debut_label:>,
+				defaut=#ENV{date}})]
+
+			[(#SAISIE{input, nb_cheques,
+				label=<:adherent:champ_nb_cheques_label:>,
+				type=number, afficher_si="@mode_paiement@=='cheque""})]
+
+			[(#SAISIE{input, montant_cheque_1,
+				label=<:adherent:champ_montant_cheque_1_label:>,
+				type=number})]
+
+			[(#SAISIE{input, montant_cheque_2,
+				label=<:adherent:champ_montant_cheque_2_label:>,
+				type=number})]
+
+			[(#SAISIE{input, montant_cheque_2,
+				label=<:adherent:champ_montant_cheque_2_label:>,
+				type=number})]
+
+			[(#SAISIE{input, montant_cheque_3,
+				label=<:adherent:champ_montant_cheque_3_label:>,
+				type=number})]
+
+			[(#SAISIE{input, montant_cheque_4,
+				label=<:adherent:champ_montant_cheque_4_label:>,
+				type=number})]
+
+			[(#SAISIE{input, montant_cheque_5,
+				label=<:adherent:champ_montant_cheque_5_label:>,
+				type=number})]
+
+			[(#SAISIE{input, montant_cheque_6,
+				label=<:adherent:champ_montant_cheque_6_label:>,
+				type=number})]
+
+			[(#SAISIE{input, montant_cheque_7,
+				label=<:adherent:champ_montant_cheque_7_label:>,
+				type=number})]
+
+			[(#SAISIE{input, montant_cheque_8,
+				label=<:adherent:champ_montant_cheque_8_label:>,
+				type=number})]
+
+			[(#SAISIE{input, montant_cheque_9,
+				label=<:adherent:champ_montant_cheque_9_label:>,
+				type=number})]
+
+			[(#SAISIE{input, montant_cheque_10,
+				label=<:adherent:champ_montant_cheque_10_label:>,
+				type=number})]
+
+			[(#SAISIE{input, montant_cheque_11,
+				label=<:adherent:champ_montant_cheque_11_label:>,
+				type=number})]
+
+			[(#SAISIE{input, montant_cheque_12,
+				label=<:adherent:champ_montant_cheque_12_label:>,
+				type=number})]
+
+			[(#SAISIE{radio, contrat_ok, obligatoire=oui,
+				label=<:adherent:champ_contrat_ok_label:>,
+				explication=<:adherent:champ_contrat_ok_explication:> ,
+				datas=[(#ARRAY{1,oui,0,non})], defaut=1})]
+
+			[(#SAISIE{radio, paiement_ok, obligatoire=oui,
+				label=<:adherent:champ_paiement_ok_label:>,
+				explication=<:adherent:champ_paiement_ok_explication:> ,
+				datas=[(#ARRAY{1,oui,0,non})], defaut=1})]
 
 			[(#SAISIE{textarea, notes,
 				label=<:adherent:champ_notes_label:>,
-				rows=4})]
-
-			[(#SAISIE{date, date_debut, obligatoire=oui,
-				label=<:adherent:champ_date_debut_label:>})]
+				rows=2})]
 
 		</div>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]

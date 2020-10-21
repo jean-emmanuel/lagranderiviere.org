@@ -1,0 +1,13 @@
+[(#REM)
+
+		Zone de saisie de numero de telephone. Sur les sites en HTML5,
+		utilise type="tel" sur le input (et donc class="tel"); et
+		type="text" par défaut pour les autres (et donc class="text").
+		Dans ce dernier cas, on renseigne quand même class="tel" pour
+		avoir une classe cohérente avec ou sans HTML5.
+
+][(#INCLURE{fond=saisies/input,
+			env,
+            type=#HTML5|?{tel,text},
+            attributs='title="Numéro de téléphone à 10 chiffres. Le 1er zero peut être remplacé par l'indicatif (ex: +33 ou 0033)." pattern="^(0|\+\[0-9\]\{2\}|00\[0-9\]\{2\})\[0-9\]\{9\}$"',
+            class=[(#HTML5|?{[(#ENV{class})],[(#ENV{class}) ]tel})]})]

@@ -91,7 +91,7 @@ function formulaires_editer_amap_charger_dist($id_amap = 'new', $retour = '', $l
 function formulaires_editer_amap_verifier_dist($id_amap = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	$erreurs = array();
 
-	$erreurs = formulaires_editer_objet_verifier('amap', $id_amap, array('nom', 'adresse', 'nom_referent', 'telephone_referent', 'mail_referent', 'livraison'));
+	$erreurs = formulaires_editer_objet_verifier('amap', $id_amap, array('nom', 'adresse', 'gps', 'livraison', 'nom_referent', 'telephone_referent', 'mail_referent', 'nom_mailinglist'));
 
 	return $erreurs;
 }

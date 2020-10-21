@@ -1,0 +1,80 @@
+<!-- exporter_csv -->
+
+#SET{admin_amap, #ARRAY}
+<BOUCLE_amap_select(AMAPS){id_auteur=#SESSION{id_auteur}}{id_amap?}>
+#SET{admin_amap, #GET{admin_amap}|push{#ID_AMAP}}
+#SET{admin_amap_nom, #NOM}
+</BOUCLE_amap_select>
+[(#ENV{id_amap}|non)
+#SET{admin_amap_nom, InterAmap}
+]
+
+#SET{amaps, #ARRAY{_,''}}
+<BOUCLE_amap(AMAPS)>
+    #SET{amaps, #GET{amaps}|array_merge{#ARRAY{_#ID_AMAP, #NOM}}}
+</BOUCLE_amap>
+
+#SET{adherents, #ARRAY}
+#SET{adherents_nom, #ARRAY}
+<BOUCLE_liste_adherents(ADHERENTS){id_amap IN #GET{admin_amap}}{par nom}>
+[(#COADHERENT|non)#SET{adherents, #GET{adherents}|push{#ID_ADHERENT}}]
+<BOUCLE_coadherents(ADHERENTS){coadherent == #ID_ADHERENT}{par nom}>
+#SET{adherents, #GET{adherents}|push{#ID_ADHERENT}}
+#SET{adherents_nom, #GET{adherents_nom}|array_merge{#ARRAY{_#COADHERENT, #_liste_adherents:NOM}}}
+</BOUCLE_coadherents>
+</BOUCLE_liste_adherents>
+
+#SET{head, #ARRAY}
+#SET{data, #ARRAY}
+<BOUCLE_adherents(ADHERENTS){id_adherent IN #GET{adherents}}>
+
+    #SET{line, #ARRAY}
+    <BOUCLE_keys(DATA){source table, #VAL{spip_adherents}|sql_showtable|table_valeur{field}}>
+    [(#CLE|match{id_adherent|maj}|non)
+
+        [(#_adherents:COMPTEUR_BOUCLE|=={1}|oui)
+            #SET{label, #VAL{champ_}|concat{#CLE}|concat{_label}}
+            [(#CLE|=={id_amap}|oui)
+                [(#SET{label, Amap})]
+            ][(#CLE|=={id_amap}|non)
+                [(#SET{label, #VAL{adherent:champ_}|concat{#CLE}|concat{_label}|_T})]
+            ]
+            #SET{head, #GET{head}|push{#GET{label}}}
+
+
+        ]
+
+        #SET{value, #CLE|sql_getfetsel{spip_adherents, #VAL{id_adherent=}|concat{#ID_ADHERENT}}}
+
+        [(#CLE|match{date}||oui)
+            [(#GET{value}|affdate|=={0}|?{
+                #SET{value, ""},
+                #SET{value, #GET{value}|affdate{d/m/Y}}
+            })]
+        ]
+
+        [(#CLE|match{id_amap}|oui)
+            #SET{value, #GET{amaps}|table_valeur{_#GET{value}}}
+        ]
+
+        [(#CLE|match{coadherent}|oui)
+            #SET{value, #GET{adherents_nom}|table_valeur{_#GET{value}}}
+        ]
+
+        #SET{line, #GET{line}|push{#GET{value}}}
+
+    ]
+    </BOUCLE_keys>
+    #SET{data, #GET{data}|push{#GET{line}}}
+
+</BOUCLE_adherents>
+
+[(#REM)
+_: [(#GET{amaps}|print)]
+_: [(#GET{head}|print)]
+[(#GET{adherents}|print)]
+[(#GET{data}|print)]
+]
+
+
+[(#VAL{#ENV{date}|affdate{Y-m-d}|concat{_AdherentsAmap_}|concat{#GET{admin_amap_nom}}}|export_csv{#GET{data}, ',', #GET{head}, 1})]

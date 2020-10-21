@@ -14,15 +14,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'champ_adresse_explication' => 'Adresse de livraison des paniers',
 	'champ_adresse_label' => 'Adresse',
-	'champ_livraison_label' => 'Jour/Heure Livraison',
+	'champ_gps_label' => 'Coordonnées GPS',
+	'champ_livraison_label' => 'Date',
 	'champ_mail_referent_explication' => 'Courriel du référent',
-	'champ_mail_referent_label' => 'Mail référent',
+	'champ_mail_referent_label' => 'Courriel',
 	'champ_nom_explication' => 'Nom de l\'AMAP',
 	'champ_nom_label' => 'Nom',
+	'champ_nom_mailinglist_label' => 'ID MailingList',
 	'champ_nom_referent_explication' => 'Nom référent de l\'AMAP',
-	'champ_nom_referent_label' => 'Nom referent',
+	'champ_nom_referent_label' => 'Nom / Prénom',
 	'champ_telephone_referent_explication' => 'Numéro de téléphone du référent',
-	'champ_telephone_referent_label' => 'Telephone référent',
+	'champ_telephone_referent_label' => 'Telephone',
 	'confirmer_supprimer_amap' => 'Confirmez-vous la suppression de cette amap ?',
 
 	// I

@@ -19,24 +19,114 @@
 	<span dir="#LANG_DIR" class="#EDIT{telephone} telephone">(#TELEPHONE)</span>
 </div>]
 
+[<div class="champ contenu_coadherent[ (#COADHERENT*|strlen|?{'',vide})]">
+	<label><:adherent:champ_coadherent_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{coadherent} coadherent">(#COADHERENT)</span>
+</div>]
+
 [<div class="champ contenu_taille_panier[ (#TAILLE_PANIER*|strlen|?{'',vide})]">
 	<label><:adherent:champ_taille_panier_label:> : </label>
 	<span dir="#LANG_DIR" class="#EDIT{taille_panier} taille_panier">(#TAILLE_PANIER)</span>
 </div>]
 
-[<div class="champ contenu_demi_panier[ (#DEMI_PANIER*|strlen|?{'',vide})]">
-	<label><:adherent:champ_demi_panier_label:> : </label>
-	<span dir="#LANG_DIR" class="#EDIT{demi_panier} demi_panier">(#DEMI_PANIER)</span>
+[<div class="champ contenu_tarif_solidaire[ (#TARIF_SOLIDAIRE*|strlen|?{'',vide})]">
+	<label><:adherent:champ_tarif_solidaire_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{tarif_solidaire} tarif_solidaire">(#TARIF_SOLIDAIRE)</span>
 </div>]
 
-[<div class="champ contenu_notes[ (#NOTES*|strlen|?{'',vide})]">
-	<label><:adherent:champ_notes_label:> : </label>
-	<span dir="#LANG_DIR" class="#EDIT{notes} notes">(#NOTES)</span>
+[<div class="champ contenu_mode_paiement[ (#MODE_PAIEMENT*|strlen|?{'',vide})]">
+	<label><:adherent:champ_mode_paiement_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{mode_paiement} mode_paiement">(#MODE_PAIEMENT)</span>
 </div>]
 
 [<div class="champ contenu_date_debut[ (#DATE_DEBUT*|!={0000-00-00 00:00:00}|?{'',vide})]">
 	<label><:adherent:champ_date_debut_label:> : </label>
 	<span dir="#LANG_DIR" class="#EDIT{date_debut} date_debut">(#DATE_DEBUT|=={0000-00-00 00:00:00}|?{'',[(#DATE_DEBUT|affdate)]})</span>
+</div>]
+
+[<div class="champ contenu_nb_cheques[ (#NB_CHEQUES*|strlen|?{'',vide})]">
+	<label><:adherent:champ_nb_cheques_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{nb_cheques} nb_cheques">(#NB_CHEQUES)</span>
+</div>]
+
+[<div class="champ contenu_montant_cheque_1[ (#MONTANT_CHEQUE_1*|strlen|?{'',vide})]">
+	<label><:adherent:champ_montant_cheque_1_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{montant_cheque_1} montant_cheque_1">(#MONTANT_CHEQUE_1)</span>
+</div>]
+
+[<div class="champ contenu_montant_cheque_2[ (#MONTANT_CHEQUE_2*|strlen|?{'',vide})]">
+	<label><:adherent:champ_montant_cheque_2_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{montant_cheque_2} montant_cheque_2">(#MONTANT_CHEQUE_2)</span>
+</div>]
+
+[<div class="champ contenu_montant_cheque_2[ (#MONTANT_CHEQUE_2*|strlen|?{'',vide})]">
+	<label><:adherent:champ_montant_cheque_2_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{montant_cheque_2} montant_cheque_2">(#MONTANT_CHEQUE_2)</span>
+</div>]
+
+[<div class="champ contenu_montant_cheque_3[ (#MONTANT_CHEQUE_3*|strlen|?{'',vide})]">
+	<label><:adherent:champ_montant_cheque_3_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{montant_cheque_3} montant_cheque_3">(#MONTANT_CHEQUE_3)</span>
+</div>]
+
+[<div class="champ contenu_montant_cheque_4[ (#MONTANT_CHEQUE_4*|strlen|?{'',vide})]">
+	<label><:adherent:champ_montant_cheque_4_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{montant_cheque_4} montant_cheque_4">(#MONTANT_CHEQUE_4)</span>
+</div>]
+
+[<div class="champ contenu_montant_cheque_5[ (#MONTANT_CHEQUE_5*|strlen|?{'',vide})]">
+	<label><:adherent:champ_montant_cheque_5_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{montant_cheque_5} montant_cheque_5">(#MONTANT_CHEQUE_5)</span>
+</div>]
+
+[<div class="champ contenu_montant_cheque_6[ (#MONTANT_CHEQUE_6*|strlen|?{'',vide})]">
+	<label><:adherent:champ_montant_cheque_6_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{montant_cheque_6} montant_cheque_6">(#MONTANT_CHEQUE_6)</span>
+</div>]
+
+[<div class="champ contenu_montant_cheque_7[ (#MONTANT_CHEQUE_7*|strlen|?{'',vide})]">
+	<label><:adherent:champ_montant_cheque_7_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{montant_cheque_7} montant_cheque_7">(#MONTANT_CHEQUE_7)</span>
+</div>]
+
+[<div class="champ contenu_montant_cheque_8[ (#MONTANT_CHEQUE_8*|strlen|?{'',vide})]">
+	<label><:adherent:champ_montant_cheque_8_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{montant_cheque_8} montant_cheque_8">(#MONTANT_CHEQUE_8)</span>
+</div>]
+
+[<div class="champ contenu_montant_cheque_9[ (#MONTANT_CHEQUE_9*|strlen|?{'',vide})]">
+	<label><:adherent:champ_montant_cheque_9_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{montant_cheque_9} montant_cheque_9">(#MONTANT_CHEQUE_9)</span>
+</div>]
+
+[<div class="champ contenu_montant_cheque_10[ (#MONTANT_CHEQUE_10*|strlen|?{'',vide})]">
+	<label><:adherent:champ_montant_cheque_10_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{montant_cheque_10} montant_cheque_10">(#MONTANT_CHEQUE_10)</span>
+</div>]
+
+[<div class="champ contenu_montant_cheque_11[ (#MONTANT_CHEQUE_11*|strlen|?{'',vide})]">
+	<label><:adherent:champ_montant_cheque_11_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{montant_cheque_11} montant_cheque_11">(#MONTANT_CHEQUE_11)</span>
+</div>]
+
+[<div class="champ contenu_montant_cheque_12[ (#MONTANT_CHEQUE_12*|strlen|?{'',vide})]">
+	<label><:adherent:champ_montant_cheque_12_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{montant_cheque_12} montant_cheque_12">(#MONTANT_CHEQUE_12)</span>
+</div>]
+
+[<div class="champ contenu_contrat_ok[ (#CONTRAT_OK*|strlen|?{'',vide})]">
+	<label><:adherent:champ_contrat_ok_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{contrat_ok} contrat_ok">(#CONTRAT_OK)</span>
+</div>]
+
+[<div class="champ contenu_paiement_ok[ (#PAIEMENT_OK*|strlen|?{'',vide})]">
+	<label><:adherent:champ_paiement_ok_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{paiement_ok} paiement_ok">(#PAIEMENT_OK)</span>
+</div>]
+
+[<div class="champ contenu_notes[ (#NOTES*|strlen|?{'',vide})]">
+	<label><:adherent:champ_notes_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{notes} notes">(#NOTES)</span>
 </div>]
 
 </BOUCLE_adherent>

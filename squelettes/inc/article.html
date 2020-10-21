@@ -1,0 +1,16 @@
+<BOUCLE_articles(ARTICLES){id_article}>
+
+<article>
+
+    <h2>#TITRE</h2>
+    <p class="date">
+        [(#DATE|affdate)]
+    </p>
+
+    [(#TEXTE|image_reduire{920, 0})]
+
+    [<div class="notes">(#NOTES)</div>]
+
+</article>
+
+</BOUCLE_articles>

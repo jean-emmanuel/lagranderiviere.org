@@ -2,7 +2,7 @@
 
 /**
  *  Fichier généré par la Fabrique de plugin v6
- *   le 2020-10-11 15:01:51
+ *   le 2020-10-20 08:48:32
  *
  *  Ce fichier de sauvegarde peut servir à recréer
  *  votre plugin avec le plugin «Fabrique» qui a servi à le créer.
@@ -36,7 +36,7 @@ $data = array (
     array (
       0 => '',
     ),
-    'version' => '1.0.0',
+    'version' => '1.0.1',
     'auteur' => 'Jean-Emmanuel Doucet',
     'auteur_lien' => '',
     'licence' => 'GNU/GPL v3',
@@ -46,7 +46,7 @@ $data = array (
     'documentation' => '',
     'administrations' => 'on',
     'schema' => '1.0.0',
-    'formulaire_config' => '',
+    'formulaire_config' => 'on',
     'formulaire_config_titre' => '',
     'fichiers' => 
     array (
@@ -131,11 +131,43 @@ $data = array (
           'recherche' => '',
           'saisie' => 'textarea',
           'explication' => 'Adresse de livraison des paniers',
-          'saisie_options' => 'rows=2',
+          'saisie_options' => 'rows=3',
         ),
         2 => 
         array (
-          'nom' => 'Nom referent',
+          'nom' => 'Coordonnées GPS',
+          'champ' => 'gps',
+          'sql' => 'text NOT NULL DEFAULT \'\'',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'versionne',
+            2 => 'obligatoire',
+          ),
+          'recherche' => '',
+          'saisie' => 'input',
+          'explication' => '',
+          'saisie_options' => '',
+        ),
+        3 => 
+        array (
+          'nom' => 'Date',
+          'champ' => 'livraison',
+          'sql' => 'text NOT NULL DEFAULT \'\'',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'versionne',
+            2 => 'obligatoire',
+          ),
+          'recherche' => '',
+          'saisie' => 'input',
+          'explication' => '',
+          'saisie_options' => '',
+        ),
+        4 => 
+        array (
+          'nom' => 'Nom / Prénom',
           'champ' => 'nom_referent',
           'sql' => 'text NOT NULL DEFAULT \'\'',
           'caracteristiques' => 
@@ -149,9 +181,9 @@ $data = array (
           'explication' => 'Nom référent de l\'AMAP',
           'saisie_options' => '',
         ),
-        3 => 
+        5 => 
         array (
-          'nom' => 'Telephone référent',
+          'nom' => 'Telephone',
           'champ' => 'telephone_referent',
           'sql' => 'text NOT NULL DEFAULT \'\'',
           'caracteristiques' => 
@@ -165,9 +197,9 @@ $data = array (
           'explication' => 'Numéro de téléphone du référent',
           'saisie_options' => '',
         ),
-        4 => 
+        6 => 
         array (
-          'nom' => 'Mail référent',
+          'nom' => 'Courriel',
           'champ' => 'mail_referent',
           'sql' => 'text NOT NULL DEFAULT \'\'',
           'caracteristiques' => 
@@ -181,10 +213,10 @@ $data = array (
           'explication' => 'Courriel du référent',
           'saisie_options' => '',
         ),
-        5 => 
+        7 => 
         array (
-          'nom' => 'Jour/Heure Livraison',
-          'champ' => 'livraison',
+          'nom' => 'ID MailingList',
+          'champ' => 'nom_mailinglist',
           'sql' => 'text NOT NULL DEFAULT \'\'',
           'caracteristiques' => 
           array (
@@ -250,7 +282,7 @@ $data = array (
         'objet_voir' => '',
         'objet_modifier' => '',
         'objet_supprimer' => '',
-        'associerobjet' => '',
+        'associerobjet' => 'webmestre',
       ),
       'boutons' => 
       array (
@@ -338,11 +370,26 @@ $data = array (
             2 => 'obligatoire',
           ),
           'recherche' => '',
-          'saisie' => 'input',
+          'saisie' => 'telephone',
           'explication' => 'Numéro de téléphone de l\'adhérent',
-          'saisie_options' => 'type=telephone',
+          'saisie_options' => '',
         ),
         4 => 
+        array (
+          'nom' => 'Co-adhérent',
+          'champ' => 'coadherent',
+          'sql' => 'int(11) NOT NULL DEFAULT 0',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'versionne',
+          ),
+          'recherche' => '',
+          'saisie' => 'adherents',
+          'explication' => 'Indiquer l\'adhérent principal associé à cet adhérent',
+          'saisie_options' => '',
+        ),
+        5 => 
         array (
           'nom' => 'Taille du panier',
           'champ' => 'taille_panier',
@@ -356,13 +403,12 @@ $data = array (
           'recherche' => '',
           'saisie' => 'selection',
           'explication' => '',
-          'saisie_options' => 'datas=[(#ARRAY{petit,petit,moyen,moyen,grand,grand})]
-',
+          'saisie_options' => 'datas=[(#ARRAY{petit,petit,moyen,moyen,grand,grand})]',
         ),
-        5 => 
+        7 => 
         array (
-          'nom' => 'Demi panier',
-          'champ' => 'demi_panier',
+          'nom' => 'Tarif solidaire',
+          'champ' => 'tarif_solidaire',
           'sql' => 'tinytext NOT NULL DEFAULT \'\'',
           'caracteristiques' => 
           array (
@@ -370,29 +416,29 @@ $data = array (
             1 => 'versionne',
           ),
           'recherche' => '',
-          'saisie' => 'oui_non',
-          'explication' => 'Indiquer le co-titulaire dans les notes le cas échéant',
-          'saisie_options' => 'datas=[(#ARRAY{0,oui,1,non})]
-',
+          'saisie' => 'radio',
+          'explication' => 'Indiquer le montant payé dans les commentaires',
+          'saisie_options' => 'datas=[(#ARRAY{1,oui,0,non})]',
         ),
-        6 => 
+        8 => 
         array (
-          'nom' => 'Notes',
-          'champ' => 'notes',
+          'nom' => 'Mode de paiement',
+          'champ' => 'mode_paiement',
           'sql' => 'text NOT NULL DEFAULT \'\'',
           'caracteristiques' => 
           array (
             0 => 'editable',
             1 => 'versionne',
+            2 => 'obligatoire',
           ),
           'recherche' => '',
-          'saisie' => 'textarea',
+          'saisie' => 'selection',
           'explication' => '',
-          'saisie_options' => 'rows=4',
+          'saisie_options' => 'datas=[(#ARRAY{cheque,cheque,espece,espece,virement,virement})], autocomplete=on, defaut=cheque',
         ),
-        7 => 
+        9 => 
         array (
-          'nom' => 'Date',
+          'nom' => 'Date d\'inscription',
           'champ' => 'date_debut',
           'sql' => 'datetime NOT NULL DEFAULT \'0000-00-00 00:00:00\'',
           'caracteristiques' => 
@@ -404,7 +450,264 @@ $data = array (
           'recherche' => '',
           'saisie' => 'date',
           'explication' => '',
-          'saisie_options' => '',
+          'saisie_options' => 'defaut=#ENV{date}',
+        ),
+        10 => 
+        array (
+          'nom' => 'Nombre de chèques',
+          'champ' => 'nb_cheques',
+          'sql' => 'int(11) NOT NULL DEFAULT 0',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'versionne',
+          ),
+          'recherche' => '',
+          'saisie' => 'input',
+          'explication' => '',
+          'saisie_options' => 'type=number, afficher_si="@mode_paiement@==\'cheque""',
+        ),
+        11 => 
+        array (
+          'nom' => 'Montant chèque 1',
+          'champ' => 'montant_cheque_1',
+          'sql' => 'text NOT NULL DEFAULT \'\'',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'versionne',
+          ),
+          'recherche' => '',
+          'saisie' => 'input',
+          'explication' => '',
+          'saisie_options' => 'type=number',
+        ),
+        12 => 
+        array (
+          'nom' => 'Montant chèque 2',
+          'champ' => 'montant_cheque_2',
+          'sql' => 'text NOT NULL DEFAULT \'\'',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'versionne',
+          ),
+          'recherche' => '',
+          'saisie' => 'input',
+          'explication' => '',
+          'saisie_options' => 'type=number',
+        ),
+        13 => 
+        array (
+          'nom' => 'Montant chèque 2',
+          'champ' => 'montant_cheque_2',
+          'sql' => 'text NOT NULL DEFAULT \'\'',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'versionne',
+          ),
+          'recherche' => '',
+          'saisie' => 'input',
+          'explication' => '',
+          'saisie_options' => 'type=number',
+        ),
+        14 => 
+        array (
+          'nom' => 'Montant chèque 3',
+          'champ' => 'montant_cheque_3',
+          'sql' => 'text NOT NULL DEFAULT \'\'',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'versionne',
+          ),
+          'recherche' => '',
+          'saisie' => 'input',
+          'explication' => '',
+          'saisie_options' => 'type=number',
+        ),
+        15 => 
+        array (
+          'nom' => 'Montant chèque 4',
+          'champ' => 'montant_cheque_4',
+          'sql' => 'text NOT NULL DEFAULT \'\'',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'versionne',
+          ),
+          'recherche' => '',
+          'saisie' => 'input',
+          'explication' => '',
+          'saisie_options' => 'type=number',
+        ),
+        16 => 
+        array (
+          'nom' => 'Montant chèque 5',
+          'champ' => 'montant_cheque_5',
+          'sql' => 'text NOT NULL DEFAULT \'\'',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'versionne',
+          ),
+          'recherche' => '',
+          'saisie' => 'input',
+          'explication' => '',
+          'saisie_options' => 'type=number',
+        ),
+        17 => 
+        array (
+          'nom' => 'Montant chèque 6',
+          'champ' => 'montant_cheque_6',
+          'sql' => 'text NOT NULL DEFAULT \'\'',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'versionne',
+          ),
+          'recherche' => '',
+          'saisie' => 'input',
+          'explication' => '',
+          'saisie_options' => 'type=number',
+        ),
+        18 => 
+        array (
+          'nom' => 'Montant chèque 7',
+          'champ' => 'montant_cheque_7',
+          'sql' => 'text NOT NULL DEFAULT \'\'',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'versionne',
+          ),
+          'recherche' => '',
+          'saisie' => 'input',
+          'explication' => '',
+          'saisie_options' => 'type=number',
+        ),
+        19 => 
+        array (
+          'nom' => 'Montant chèque 8',
+          'champ' => 'montant_cheque_8',
+          'sql' => 'text NOT NULL DEFAULT \'\'',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'versionne',
+          ),
+          'recherche' => '',
+          'saisie' => 'input',
+          'explication' => '',
+          'saisie_options' => 'type=number',
+        ),
+        20 => 
+        array (
+          'nom' => 'Montant chèque 9',
+          'champ' => 'montant_cheque_9',
+          'sql' => 'text NOT NULL DEFAULT \'\'',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'versionne',
+          ),
+          'recherche' => '',
+          'saisie' => 'input',
+          'explication' => '',
+          'saisie_options' => 'type=number',
+        ),
+        21 => 
+        array (
+          'nom' => 'Montant chèque 10',
+          'champ' => 'montant_cheque_10',
+          'sql' => 'text NOT NULL DEFAULT \'\'',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'versionne',
+          ),
+          'recherche' => '',
+          'saisie' => 'input',
+          'explication' => '',
+          'saisie_options' => 'type=number',
+        ),
+        22 => 
+        array (
+          'nom' => 'Montant chèque 11',
+          'champ' => 'montant_cheque_11',
+          'sql' => 'text NOT NULL DEFAULT \'\'',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'versionne',
+          ),
+          'recherche' => '',
+          'saisie' => 'input',
+          'explication' => '',
+          'saisie_options' => 'type=number',
+        ),
+        23 => 
+        array (
+          'nom' => 'Montant chèque 12',
+          'champ' => 'montant_cheque_12',
+          'sql' => 'text NOT NULL DEFAULT \'\'',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'versionne',
+          ),
+          'recherche' => '',
+          'saisie' => 'input',
+          'explication' => '',
+          'saisie_options' => 'type=number',
+        ),
+        24 => 
+        array (
+          'nom' => 'Contrat récupéré',
+          'champ' => 'contrat_ok',
+          'sql' => 'tinytext NOT NULL DEFAULT \'\'',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'versionne',
+            2 => 'obligatoire',
+          ),
+          'recherche' => '',
+          'saisie' => 'radio',
+          'explication' => 'Le contrat a-t-il été signé et récupéré ?',
+          'saisie_options' => 'datas=[(#ARRAY{1,oui,0,non})], defaut=1',
+        ),
+        25 => 
+        array (
+          'nom' => 'Paiement récupéré',
+          'champ' => 'paiement_ok',
+          'sql' => 'tinytext NOT NULL DEFAULT \'\'',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'versionne',
+            2 => 'obligatoire',
+          ),
+          'recherche' => '',
+          'saisie' => 'radio',
+          'explication' => 'Le paiement a-t-il été récupéré ?',
+          'saisie_options' => 'datas=[(#ARRAY{1,oui,0,non})], defaut=1',
+        ),
+        26 => 
+        array (
+          'nom' => 'Commentaires',
+          'champ' => 'notes',
+          'sql' => 'text NOT NULL DEFAULT \'\'',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'versionne',
+          ),
+          'recherche' => '',
+          'saisie' => 'textarea',
+          'explication' => '',
+          'saisie_options' => 'rows=2',
         ),
       ),
       'champ_titre' => 'nom',
@@ -453,12 +756,16 @@ $data = array (
           0 => 'action/supprimer_objet.php',
         ),
       ),
+      'saisies' => 
+      array (
+        0 => 'objets',
+      ),
       'autorisations' => 
       array (
         'objet_creer' => '',
         'objet_voir' => '',
         'objet_modifier' => '',
-        'objet_supprimer' => '',
+        'objet_supprimer' => 'redacteur',
         'associerobjet' => '',
       ),
       'boutons' => 
@@ -468,5 +775,21 @@ $data = array (
       ),
     ),
   ),
-  'images' => NULL,
+  'images' => 
+  array (
+    'paquet' => 
+    array (
+      'logo' => 
+      array (
+        0 => 
+        array (
+          'extension' => '',
+          'contenu' => '',
+        ),
+      ),
+    ),
+    'objets' => 
+    array (
+    ),
+  ),
 );

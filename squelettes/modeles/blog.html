@@ -1,0 +1,24 @@
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique=#ID}>
+<B_blog>
+
+<BOUCLE_blog(ARTICLES){id_rubrique}{pagination 1 test}{par date}{inverse}>
+<article>
+
+    <h2>#TITRE</h2>
+    <p class="date">
+        <a href="[(#SELF|parametre_url{debut_blog, @#ID_ARTICLE})]" title="Lien permanent">[(#DATE|affdate)]</a>
+        <!-- <a href="[(#URL_ARTICLE)]" title="Lien permanent">[(#DATE|affdate)]</a> -->
+        <span class="pagination">#PAGINATION{precedent_suivant, label_precedent=Suivant, label_suivant=Précédent}</span>
+
+    </p>
+
+    [(#TEXTE|image_reduire{920, 0})]
+
+    [<div class="notes">(#NOTES)</div>]
+
+</article>
+</BOUCLE_blog>
+
+</B_blog>
+
+</BOUCLE_rubrique>

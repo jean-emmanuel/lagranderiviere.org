@@ -1,0 +1,243 @@
+#SET{labels, #ARRAY}
+#SET{explications, #ARRAY}
+<BOUCLE_keys(DATA){source table, #VAL{spip_adherents}|sql_showtable|table_valeur{field}}>
+    #SET{label, #VAL{adherent:champ_}|concat{#CLE}|concat{_label}|_T}
+    #SET{explication, #VAL{adherent:champ_}|concat{#CLE}|concat{_explication}|_T}
+    #SET{labels, #GET{labels}|array_merge{#ARRAY{#CLE,#GET{label}}}}
+    #SET{explications, #GET{explications}|array_merge{#ARRAY{#CLE,#GET{explication}}}}
+</BOUCLE_keys>
+
+
+#SET{montants_cheques, #LISTE{
+    #ARRAY{
+      saisie, input,
+      options, #ARRAY{
+        nom, nb_cheques,
+        label, #GET{labels}|table_valeur{nb_cheques},
+        type, number,
+        defaut, 12,
+      }
+    }
+}}
+<BOUCLE_montants(DATA){liste 1,2,3,4,5,6,7,8,9,10,11,12}>
+#SET{montants_cheques, #GET{montants_cheques}|push{#ARRAY{
+  saisie, input,
+  options, #ARRAY{
+    nom, #VAL{montant_cheque_}|concat{#VALEUR},
+    label, #VAL{Montant chèque }|concat{#VALEUR},
+    afficher_si, #VAL{"@nb_cheques@ >= "}|concat{#VALEUR},
+    conteneur_class, editer_montant_cheque
+
+  }
+}}}
+</BOUCLE_montants>
+
+#SET{url_coadherent, #SELF|parametre_url{id_adherent, #COADHERENT}}
+#SET{texte_coadherent, #VAL{Les informations concernant le panier et le paiement doivent être renseignées uniquement sur la fiche de <a href="URL#admin">l'adhérent principal</a> indiqué ci-dessus.}|replace{URL, #GET{url_coadherent}}}
+
+#SET{saisies,
+  #LISTE{
+    #ARRAY{
+      saisie, input,
+      options, #ARRAY{
+        nom, nom,
+        label, #GET{labels}|table_valeur{nom},
+		explication, #GET{explications}|table_valeur{nom},
+		obligatoire, oui
+      }
+    },
+	#ARRAY{
+      saisie, amaps,
+      options, #ARRAY{
+        nom, id_amap,
+        label, Amap,
+        obligatoire, oui,
+      },
+    },
+    #ARRAY{
+      saisie, date,
+      options, #ARRAY{
+        nom, date_debut,
+        label, #GET{labels}|table_valeur{date_debut},
+        obligatoire, oui,
+        defaut, #ENV{date}
+      },
+    },
+	#ARRAY{
+	  saisie, textarea,
+	  options, #ARRAY{
+		nom, adresse,
+		label, #GET{labels}|table_valeur{adresse},
+		explication, #GET{explications}|table_valeur{adresse},
+		obligatoire, oui,
+        rows, 2
+	  },
+	},
+	#ARRAY{
+	  saisie, input,
+	  options, #ARRAY{
+		nom, mail,
+		label, #GET{labels}|table_valeur{mail},
+		explication, #GET{explications}|table_valeur{mail},
+		type, email,
+		obligatoire, oui
+	  },
+	  verifier, #ARRAY{
+		type, email
+	  }
+	},
+	#ARRAY{
+	  saisie, telephone,
+	  options, #ARRAY{
+		nom, telephone,
+		label, #GET{labels}|table_valeur{telephone},
+		explication, #GET{explications}|table_valeur{telephone},
+		obligatoire, oui,
+	  },
+	},
+    #ARRAY{
+      saisie, adherents,
+      options, #ARRAY{
+        nom, coadherent,
+        label, #GET{labels}|table_valeur{coadherent},
+        explication, #GET{explications}|table_valeur{coadherent} ,
+        obligatoire, non,
+      },
+    },
+    #ARRAY{
+      saisie, explication,
+      options, #ARRAY{
+        nom, coadherent_explication,
+        texte, #GET{texte_coadherent},
+        afficher_si, '@coadherent@ != ""',
+        conteneur_class, #COADHERENT|?{show,hide}
+      },
+    },
+    #ARRAY{
+      saisie, fieldset,
+      options, #ARRAY{
+        nom, test,
+        afficher_si, '@coadherent@ == ""',
+        conteneur_class, #COADHERENT|?{hide,show}
+      },
+      saisies, #LISTE{
+          #ARRAY{
+            saisie, selection,
+            options, #ARRAY{
+              nom, taille_panier,
+              label, #GET{labels}|table_valeur{taille_panier},
+              obligatoire, oui,
+              datas, #ARRAY{" "," ",petit,petit,moyen,moyen,grand,grand},
+              defaut, " "
+            },
+          },
+          #ARRAY{
+            saisie, radio,
+            options, #ARRAY{
+              nom, tarif_solidaire,
+              label, #GET{labels}|table_valeur{tarif_solidaire},
+              explication, #GET{explications}|table_valeur{tarif_solidaire} ,
+              obligatoire, oui,
+              datas, #ARRAY{1,oui,0,non},
+                defaut: 0
+            },
+          },
+          #ARRAY{
+            saisie, selection,
+            options, #ARRAY{
+              nom, mode_paiement,
+              label, #GET{labels}|table_valeur{mode_paiement},
+              obligatoire, oui,
+              datas, #ARRAY{cheque,chèque,espece,espèces,virement,virement},
+                defaut,cheque,
+            },
+          },
+            #ARRAY{
+              saisie, fieldset,
+              options, #ARRAY{
+                nom, test,
+                afficher_si, '@mode_paiement@ == "cheque"',
+                conteneur_class, sous-groupe,
+              },
+              saisies, #GET{montants_cheques}
+            },
+            #ARRAY{
+              saisie, radio,
+              options, #ARRAY{
+                nom, contrat_ok,
+                label, #GET{labels}|table_valeur{contrat_ok},
+                explication, #GET{explications}|table_valeur{contrat_ok} ,
+                obligatoire, oui,
+                datas, #ARRAY{1,oui,0,non},
+                defaut, 1,
+              },
+            },
+            #ARRAY{
+              saisie, radio,
+              options, #ARRAY{
+                nom, paiement_ok,
+                label, #GET{labels}|table_valeur{paiement_ok},
+                explication, #GET{explications}|table_valeur{paiement_ok} ,
+                datas, #ARRAY{1,oui,0,non},
+                obligatoire, oui,
+                defaut, 1,
+              },
+            },
+      }
+    },
+    #ARRAY{
+      saisie, textarea,
+      options, #ARRAY{
+        nom, notes,
+		label, #GET{labels}|table_valeur{notes},
+        rows, 2,
+      }
+    },
+
+  }
+}
+
+
+[(#VAL{supprimer_adherent}|_request|non)
+
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_adherent,nouveau}'>
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    [(#REM)[(#ENV{date}|strtotime|moins{#MAJ|affdate{c}|strtotime}|=={0}|oui)
+    <p class="reponse_formulaire reponse_formulaire_ok">Vos modifications ont bien été enregistrées.</p>
+    ]]
+
+    [(#ENV{editable})
+    <form method="post" action="#ENV{action}"><div>
+        #ACTION_FORMULAIRE{#ENV{action}}
+        <input type="hidden" name="id_adherent" value="#ENV{id_adherent}" />
+        <div class="editer-groupe">
+        #GENERER_SAISIES{#GET{saisies}}
+        </div>
+        <div class="buttons">
+            <input type="submit" class="submit" value="[(#ENV{ajouter_adherent}|?{Ajouter, Enregistrer})]"/>
+            [(#AUTORISER{supprimer, adherent, #ID_ADHERENT}|oui)[(#ENV{id_adherent}|et{#ENV{id_adherent}|!={oui}|oui})
+            <a class="button accent danger" href="[(#SELF|parametre_url{supprimer_adherent, oui})]">Supprimer</a>
+            ]]
+        </div>
+
+    </form>
+    ]
+    <script src="[(#CHEMIN{js/editer_adherent.js})]" type="text/javascript"></script>
+</div>
+]
+
+<BOUCLE_suppr(ADHERENTS){id_adherent}{si #VAL{supprimer_adherent}|_request|oui}{si #AUTORISER{supprimer, adherent, #ID_ADHERENT}}>
+
+<p>
+    Êtes vous sûr de vouloir supprimer l'adhérent <b>[(#NOM|textebrut)]</b> ?
+    Cette action n'est pas réversible, pensez à exporter la liste des adhérent pour conserver une sauvegarde.
+</p>
+
+<a class="button accent danger" href="#URL_ACTION_AUTEUR{supprimer_adherent, #ID_ADHERENT, #SELF|parametre_url{ajouter_adherent, ''}|parametre_url{id_adherent, ''}}" [(#REM)onclick="return confirm('Êtes-vous certain de vouloir supprimer cet adherent ?')"]>Supprimer</a>
+<a class="button" href="[(#SELF|parametre_url{supprimer_adherent, ''})]">Annuler</a>
+
+</BOUCLE_suppr>
+[(#VAL{supprimer_adherent}|_request|et{#AUTORISER{supprimer, adherent, #ID_ADHERENT}|non})
+<p>Vous n'êtes pas autorisé à effectuer cette action.</p>
+]

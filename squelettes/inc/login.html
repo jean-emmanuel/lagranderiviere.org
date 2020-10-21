@@ -1,15 +1,14 @@
+
+
 [(#SESSION{id_auteur}|oui)
+
 
 #INCLURE{fond=inc/admin, id_auteur=#SESSION{id_auteur}, env}
 
 ][(#SESSION{id_auteur}|non)
 
-<h2>
-	Connexion
-</h2>
-
-<hr/><br/>
-
 #LOGIN_PUBLIC
 
 ]
+
+#FILTRE{nosaisie}

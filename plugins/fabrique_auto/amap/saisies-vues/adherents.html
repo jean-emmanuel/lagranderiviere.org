@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_adherents_selectionnes>
+	<ul>
+	<BOUCLE_adherents_selectionnes(ADHERENTS){id_adherent IN #GET*{valeur}}
+		{par num nom, nom}{tout}>
+		<li class="choix">#NOM (#ID_ADHERENT)</li>
+	</BOUCLE_adherents_selectionnes>
+	</ul>
+	</B_adherents_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_adherents_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_adherent_selectionne(ADHERENTS){id_adherent=#ENV{valeur}}
+		{par num nom, nom}{tout}>
+	  	<p>#NOM (#ID_ADHERENT)</p>
+	</BOUCLE_adherent_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_adherent_selectionne>
+<//B_test_multiple>

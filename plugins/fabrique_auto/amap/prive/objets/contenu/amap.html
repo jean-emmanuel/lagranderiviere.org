@@ -9,6 +9,16 @@
 	<span dir="#LANG_DIR" class="#EDIT{adresse} adresse">(#ADRESSE)</span>
 </div>]
 
+[<div class="champ contenu_gps[ (#GPS*|strlen|?{'',vide})]">
+	<label><:amap:champ_gps_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{gps} gps">(#GPS)</span>
+</div>]
+
+[<div class="champ contenu_livraison[ (#LIVRAISON*|strlen|?{'',vide})]">
+	<label><:amap:champ_livraison_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{livraison} livraison">(#LIVRAISON)</span>
+</div>]
+
 [<div class="champ contenu_nom_referent[ (#NOM_REFERENT*|strlen|?{'',vide})]">
 	<label><:amap:champ_nom_referent_label:> : </label>
 	<span dir="#LANG_DIR" class="#EDIT{nom_referent} nom_referent">(#NOM_REFERENT)</span>
@@ -24,9 +34,9 @@
 	<span dir="#LANG_DIR" class="#EDIT{mail_referent} mail_referent">(#MAIL_REFERENT)</span>
 </div>]
 
-[<div class="champ contenu_livraison[ (#LIVRAISON*|strlen|?{'',vide})]">
-	<label><:amap:champ_livraison_label:> : </label>
-	<span dir="#LANG_DIR" class="#EDIT{livraison} livraison">(#LIVRAISON)</span>
+[<div class="champ contenu_nom_mailinglist[ (#NOM_MAILINGLIST*|strlen|?{'',vide})]">
+	<label><:amap:champ_nom_mailinglist_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{nom_mailinglist} nom_mailinglist">(#NOM_MAILINGLIST)</span>
 </div>]
 
 </BOUCLE_amap>

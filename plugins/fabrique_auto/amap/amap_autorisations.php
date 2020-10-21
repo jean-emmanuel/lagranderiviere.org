@@ -197,7 +197,7 @@ function autoriser_adherent_modifier_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_adherent_supprimer_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo' and !$qui['restreint'];
+	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
 

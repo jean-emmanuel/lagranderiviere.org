@@ -15,7 +15,13 @@
 			[(#SAISIE{textarea, adresse, obligatoire=oui,
 				label=<:amap:champ_adresse_label:>,
 				explication=<:amap:champ_adresse_explication:> ,
-				rows=2})]
+				rows=3})]
+
+			[(#SAISIE{input, gps, obligatoire=oui,
+				label=<:amap:champ_gps_label:>})]
+
+			[(#SAISIE{input, livraison, obligatoire=oui,
+				label=<:amap:champ_livraison_label:>})]
 
 			[(#SAISIE{input, nom_referent, obligatoire=oui,
 				label=<:amap:champ_nom_referent_label:>,
@@ -29,8 +35,8 @@
 				label=<:amap:champ_mail_referent_label:>,
 				explication=<:amap:champ_mail_referent_explication:> })]
 
-			[(#SAISIE{input, livraison, obligatoire=oui,
-				label=<:amap:champ_livraison_label:>})]
+			[(#SAISIE{input, nom_mailinglist, obligatoire=oui,
+				label=<:amap:champ_nom_mailinglist_label:>})]
 
 		</div>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]

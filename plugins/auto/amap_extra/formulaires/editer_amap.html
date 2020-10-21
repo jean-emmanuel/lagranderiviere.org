@@ -1,0 +1,145 @@
+#SET{labels, #ARRAY}
+#SET{explications, #ARRAY}
+<BOUCLE_keys(DATA){source table, #VAL{spip_amaps}|sql_showtable|table_valeur{field}}>
+    #SET{label, #VAL{amap:champ_}|concat{#CLE}|concat{_label}|_T}
+    #SET{explication, #VAL{amap:champ_}|concat{#CLE}|concat{_explication}|_T}
+    #SET{labels, #GET{labels}|array_merge{#ARRAY{#CLE,#GET{label}}}}
+    #SET{explications, #GET{explications}|array_merge{#ARRAY{#CLE,#GET{explication}}}}
+</BOUCLE_keys>
+
+#SET{webmaster, #SESSION{statut}|=={0minirezo}|?{'', oui}}
+
+#SET{saisies,
+  #LISTE{
+    #ARRAY{
+      saisie, input,
+      options, #ARRAY{
+        nom, nom,
+        label, #GET{labels}|table_valeur{nom},
+		explication, #GET{explications}|table_valeur{nom},
+		obligatoire, oui,
+        disable_avec_post, #GET{webmaster}
+      }
+    },
+    #ARRAY{
+        saisie, fieldset,
+        options, #ARRAY{
+          nom, f0,
+          label, Livraison des paniers,
+        },
+        saisies, #LISTE{
+            #ARRAY{
+              saisie, input,
+              options, #ARRAY{
+                nom, livraison,
+                label, #GET{labels}|table_valeur{livraison},
+                explication, #GET{explications}|table_valeur{livraison},
+                obligatoire, oui,
+                disable_avec_post, #GET{webmaster}
+              }
+            },
+            #ARRAY{
+              saisie, textarea,
+              options, #ARRAY{
+                nom, adresse,
+                label, #GET{labels}|table_valeur{adresse},
+                explication, #GET{explications}|table_valeur{adresse},
+                obligatoire, oui,
+                rows, 3,
+                disable_avec_post, #GET{webmaster}
+              }
+            },
+            #ARRAY{
+              saisie, input,
+              options, #ARRAY{
+                nom, gps,
+                label, #GET{labels}|table_valeur{gps},
+                explication, #GET{explications}|table_valeur{gps},
+                obligatoire, oui,
+                disable_avec_post, #GET{webmaster}
+              }
+            },
+      }
+    },
+    #ARRAY{
+        saisie, fieldset,
+        options, #ARRAY{
+          nom, f1,
+          label, Coordonnées référent,
+        },
+        saisies, #LISTE{
+            #ARRAY{
+              saisie, input,
+              options, #ARRAY{
+                nom, nom_referent,
+                label, #GET{labels}|table_valeur{nom_referent},
+                explication, #GET{explications}|table_valeur{nom_referent},
+                obligatoire, oui
+              }
+            },
+            #ARRAY{
+              saisie, input,
+              options, #ARRAY{
+                nom, mail_referent,
+                label, #GET{labels}|table_valeur{mail_referent},
+                explication, #GET{explications}|table_valeur{mail_referent},
+                type, email,
+                obligatoire, oui
+              },
+              verifier, #ARRAY{
+                type, email
+              }
+            },
+            #ARRAY{
+              saisie, telephone,
+              options, #ARRAY{
+                nom, telephone_referent,
+                label, #GET{labels}|table_valeur{telephone_referent},
+                explication, #GET{explications}|table_valeur{telephone_referent},
+                obligatoire, oui,
+              },
+            },
+        }
+      },
+      #ARRAY{
+          saisie, fieldset,
+          options, #ARRAY{
+            nom, f2,
+            label, Informations techniques,
+          },
+          saisies, #LISTE{
+              #ARRAY{
+                saisie, input,
+                options, #ARRAY{
+                  nom, nom_mailinglist,
+                  label, #GET{labels}|table_valeur{nom_mailinglist},
+                  explication, #GET{explications}|table_valeur{nom_mailinglist},
+                  obligatoire, oui,
+                  disable_avec_post, #GET{webmaster}
+                }
+              },
+          }
+      },
+  }
+}
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_amap,nouveau}'>
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    [(#REM)[(#ENV{date}|strtotime|moins{#MAJ|affdate{c}|strtotime}|=={0}|oui)
+    <p class="reponse_formulaire reponse_formulaire_ok">Vos modifications ont bien été enregistrées.</p>
+    ]]
+
+    [(#ENV{editable})
+    <form method="post" action="#ENV{action}"><div>
+        #ACTION_FORMULAIRE{#ENV{action}}
+        <input type="hidden" name="id_amap" value="#ENV{id_amap}" />
+        <div class="editer-groupe">
+        #GENERER_SAISIES{#GET{saisies}}
+        </div>
+        <div class="buttons">
+            <input type="submit" class="submit" value="Enregistrer"/>
+        </div>
+
+    </form>
+    ]
+</div>

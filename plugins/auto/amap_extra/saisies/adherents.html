@@ -1,0 +1,9 @@
+
+<select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"]>
+	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
+		<option value="">[(#ENV{option_intro})]</option>]
+	<BOUCLE_adherents(ADHERENTS){id_adherent?}{id_amap?}{recherche?}{tout}{par num nom, nom}>
+		[(#COADHERENT|non)[(#ID_ADHERENT|!={#VAL{id_adherent}|_request}|oui)
+		<option value="#ID_ADHERENT"[(#ID_ADHERENT|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>#NOM</option>]]
+	</BOUCLE_adherents>
+</select>

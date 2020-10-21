@@ -1,0 +1,23 @@
+<paquet
+	prefix="amap_extra"
+	categorie="divers"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.2.8;3.2.*]"
+	logo=""
+	documentation=""
+	schema="1.0.0"
+>
+
+	<nom>Amap Extra</nom>
+	<!-- Gestion des adhérents pour les AMAP (module complementaire)-->
+
+	<auteur>Jean-Emmanuel Doucet</auteur>
+
+	<licence>GNU/GPL v3</licence>
+	<necessite nom="amap" compatibilite="[1.0.0;]" />
+	<utilise nom="amap" />
+
+	<pipeline nom="formulaire_verifier" inclure="amap_extra_pipelines.php" />
+	<pipeline nom="pre_edition" inclure="amap_extra_pipelines.php" />
+</paquet>

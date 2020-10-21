@@ -1,3 +1,5 @@
+$mobile-width: 940px;
+
 @import 'css/reset';
 
 :root {
@@ -326,12 +328,18 @@ main {
 	display: flex;
 	flex-direction: row;
     height: 100%;
+    flex-wrap: wrap;
 
     .col-left {
     	width: 400px;
     	margin-right: 20px;
         max-height: 600px;
         overflow-y: auto;
+        @media screen and (max-width: $mobile-width) {
+            width: 100%;
+            margin-right: 0;
+            max-height: 400px;
+        }
     }
     .col-right {
     	flex: 1;
@@ -733,6 +741,10 @@ table {
         flex:1;
         min-width: 0;
         pointer-events: none;
+    }
+    @media screen and (max-width: $mobile-width) {
+        min-width: 50%;
+        flex: 1;
     }
 }
 .tab-content {

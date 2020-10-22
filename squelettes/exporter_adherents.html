@@ -77,4 +77,4 @@ _: [(#GET{head}|print)]
 ]
 
 
-[(#VAL{#ENV{date}|affdate{Y-m-d}|concat{_AdherentsAmap_}|concat{#GET{admin_amap_nom}}}|export_csv{#GET{data}, ',', #GET{head}, 1})]
+[(#VAL{#ENV{date}|affdate{Y-m-d}|concat{_AdherentsAmap_}|concat{#GET{admin_amap_nom}}}|export_csv{#GET{data}, #ENV{format}|=={csv}|?{",",";"}, #GET{head}, 1})]

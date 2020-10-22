@@ -443,6 +443,12 @@ main {
             flex-direction: row;
             margin-bottom: 4px;
             padding-left: var(--p-margin);
+            &.hide{
+                display: none;
+            }
+            &.show{
+                display: flex!important;
+            }
             label {
                 font-size: 80%;
                 width: 40%;
@@ -520,7 +526,7 @@ label {
     // font-weight: bold;
 }
 
-a.button, input:not([type="radio"]), textarea, select {
+.button, input:not([type="radio"]), textarea, select {
     padding:0;
     box-sizing: inherit;
     padding: 0 5px;
@@ -532,11 +538,12 @@ a.button, input:not([type="radio"]), textarea, select {
         background-color: var(--background)
     }
 }
-a.button {
+.button {
     padding: 0 10px;
     line-height: 30px;
     color:inherit;
     display: inline-block;
+    cursor: pointer;
     &.accent {
         background: var(--accent);
         border-color: var(--accent);
@@ -547,6 +554,9 @@ a.button {
     }
     &.danger {
         --accent: var(--error);
+    }
+    &.valid {
+        --accent: var(--valid);
     }
     &[disabled], &.disabled {
         color: var(--faded);
@@ -772,4 +782,38 @@ table {
 #tab9:checked ~ #tab-content9,
 #tab10:checked ~ #tab-content10 {
     display: block;
+}
+
+
+dialog {
+    background-color: var(--background);
+    color: var(--text);
+    border: none;
+    border-radius: var(--border-radius);
+    border-color: var(--border);
+    padding: var(--p-margin);
+    .header {
+        background-color: var(--background-alt);
+        border-radius: var(--border-radius) var(--border-radius) 0 0;
+        margin: calc(var(--p-margin) * -1 );
+        margin-bottom: var(--p-margin);
+        padding: var(--p-margin);
+        text-align: center;
+    }
+    &::backdrop {
+        background: #0000009c;
+        backdrop-filter: blur(4px);
+    }
+    .actions {
+        display: flex;
+        flex-direction: row;
+        a {
+            flex: 1;
+            text-align: center;
+            margin-right: var(--p-margin);
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
 }

@@ -29,6 +29,8 @@ function verifier_afficher_si(form, saisie, chargement) {
     condition = eval(condition);
     if (condition) {
         afficher_si_show(saisie);
+        saisie.removeClass('hide')
+        saisie.addClass('show')
         saisie.removeClass('afficher_si_masque').addClass('afficher_si_visible');
         saisie.find('[data-afficher-si-required]').attr('required', true).attr('data-afficher-si-required',false);
     } else {
@@ -39,6 +41,8 @@ function verifier_afficher_si(form, saisie, chargement) {
             // saisie.css('display','none');
         } else {
             afficher_si_hide(saisie);
+            saisie.addClass('hide')
+            saisie.removeClass('show')
         }
         saisie.addClass('afficher_si_masque').removeClass('afficher_si_visible');
         saisie.find('[required]').attr('required', false).attr('data-afficher-si-required', null);

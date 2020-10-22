@@ -1,0 +1,19 @@
+#HTTP_HEADER{Content-Type: text/javascript}
+
+#INCLURE{prive/javascript/jquery.js}
+#INCLURE{prive/javascript/ajaxCallback.js}
+#INCLURE{prive/javascript/jquery.placeholder-label.js}
+$(function() {
+
+// Modal dialog
+
+$('.dialog-trigger').click(function(e){
+    e.preventDefault()
+    $('#' + $(this).attr('data-dialog'))[0].showModal()
+    $('#' + $(this).attr('data-dialog')).find('a').blur()
+})
+
+$('.dialog-close').click(function(e){
+    $('#' + $(this).attr('data-dialog'))[0].close()
+})
+})

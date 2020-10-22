@@ -22,7 +22,7 @@
 
             <p>
                 <b>Lieu de livraison des paniers : </b>
-                [(#ADRESSE|textebrut)]
+                [(#ADRESSE|replace{\s\n,", "}|textebrut)]
             </p>
 
             <p>
@@ -49,25 +49,32 @@ var map = L.map('carte-amap').setView([48.02, 0.199556], 10);
 //     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 // }).addTo(map);
 
+// L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+// }).addTo(map);
+
 L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href= "http://cartodb.com/attributions#basemaps">CartoDB</a>',
-    // minNativeZoom: 12
+    attribution: '&copy; <a href= "http://cartodb.com/attributions#basemaps">CartoDB</a>'
 }).addTo(map);
 
-<BOUCLE_amap_markers(AMAPS){gps != ''}>
-L.marker([ #GPS ], {alt:'[(#NOM|textebrut|replace{"'", &#39})]'}).addTo(map)
-    .on('click', function(){
-        $('[data-marker="'+this._icon.getAttribute('alt')+ '"]').click()
-        $('.leaflet-marker-icon').removeClass('on')
-        $(this._icon).addClass('on')
-        $('#amap-tabs')[0].scrollIntoView({block: 'center', behavior: 'smooth'})
-    })
 
-</BOUCLE_amap_markers>
+var data = {<BOUCLE_amap_markers(AMAPS){gps != ''}{", "}>'[(#NOM|textebrut|replace{"'", &#39})]':[#GPS]</BOUCLE_amap_markers>}
+    markers = {}
+    
+for (var name in data) {
+    markers[name] = L.marker(data[name], {alt:name}).addTo(map)
+        .on('click', function(){
+            $('[data-marker="'+this._icon.getAttribute('alt')+ '"]').click()
+            $('.leaflet-marker-icon').removeClass('on')
+            $(this._icon).addClass('on')
+            $('#amap-tabs')[0].scrollIntoView({block: 'center', behavior: 'smooth'})
+        })
+}
 
 $('[data-marker]').click(function(){
     $('.leaflet-marker-icon').removeClass('on')
     $('.leaflet-marker-icon[alt="'+$(this).attr('data-marker')+'"]').addClass('on')
+    map.panInside(markers[$(this).attr('data-marker')]._latlng, {padding: [60, 60]})
 })
 $('.leaflet-marker-icon').first().addClass('on')
 </script>

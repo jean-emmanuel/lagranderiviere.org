@@ -34,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_montant_cheque_7_label' => 'Montant chèque 7',
 	'champ_montant_cheque_8_label' => 'Montant chèque 8',
 	'champ_montant_cheque_9_label' => 'Montant chèque 9',
+	'champ_montant_total_label' => 'Montant total',
 	'champ_nb_cheques_label' => 'Nombre de chèques',
 	'champ_nom_explication' => 'Nom et prénom de l\'adhérent',
 	'champ_nom_label' => 'Nom / Prénom',

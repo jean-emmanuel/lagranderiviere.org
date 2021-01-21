@@ -14,11 +14,26 @@
 						<:adherent:champ_nom_label:>
 					[(#ENV{tri_liste_adherents, nom}|!={nom}|oui)</a>]
 				</th>
+				<th class="taille_panier" scope="col">
+					[(#ENV{tri_liste_adherents, nom}|!={taille_panier}|oui)<a href="[(#SELF|parametre_url{tri_liste_adherents, taille_panier})]#admin" class="ajax">]
+						<!-- <:adherent:champ_taille_panier_label:> -->
+						Taille
+					[(#ENV{tri_liste_adherents, nom}|!={taille_panier}|oui)</a>]
+				</th>
+				<th class="paiement_ok" scope="col">
+					[(#ENV{tri_liste_adherents, nom}|!={paiement_ok}|oui)<a href="[(#SELF|parametre_url{tri_liste_adherents, paiement_ok})]#admin" class="ajax">]
+						<!-- <:adherent:champ_paiement_ok_label:> -->
+						Paiement
+					[(#ENV{tri_liste_adherents, nom}|!={paiement_ok}|oui)</a>]
+				</th>
+				[(#REM)
 				<th class="date" scope="col" style="width:100px">
 					[(#TRI_LISTE_ADHERENTS|!={date_debut}|oui)<a href="[(#SELF|parametre_url{tri_liste_adherents, date_debut})]#admin" class="ajax">]
 						<!-- <:adherent:champ_date_debut_label:> -->
 						Date
 					[(#TRI_LISTE_ADHERENTS|!={date_debut}|oui)</a>]
+				</th>
+				]
 			</tr>
 		</thead>
 	<BOUCLE_liste_adherents(ADHERENTS){tout}{id_amap?}{tri #ENV{par nom},#GET{defaut_tri}}{inverse #ENV{senstri}}{par nom}>
@@ -29,11 +44,23 @@
 					#NOM
 				</a>
 			</td>
+			<td class="taille_panier">
+				<a class="[(#EXPOSE|oui)on]" href="[(#SELF|parametre_url{id_adherent,#ID_ADHERENT}|parametre_url{ajouter_adherent, ''}|parametre_url{supprimer_adherent, ''})]#admin">
+					#TAILLE_PANIER
+				</a>
+			</td>
+			<td class="paiement_ok">
+				<a class="[(#EXPOSE|oui)on]" href="[(#SELF|parametre_url{id_adherent,#ID_ADHERENT}|parametre_url{ajouter_adherent, ''}|parametre_url{supprimer_adherent, ''})]#admin">
+					[(#PAIEMENT_OK|?{OK,En attente})]
+				</a>
+			</td>
+			[(#REM)
 			<td class="date" >
 				<a class="[(#EXPOSE|oui)on]" href="[(#SELF|parametre_url{id_adherent,#ID_ADHERENT}|parametre_url{ajouter_adherent, ''}|parametre_url{supprimer_adherent, ''})]#admin">
 					[(#DATE_DEBUT|affdate{d/m/Y})]
 				</a>
 			</td>
+			]
 		</tr>
 	</BOUCLE_liste_adherents>
 	</tbody>

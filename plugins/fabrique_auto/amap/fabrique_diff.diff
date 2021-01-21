@@ -1,10 +1,38 @@
-diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_amap.php ../plugins/fabrique_auto/.backup/amap/lang/amap_fr.php ../plugins/fabrique_auto/amap/lang/amap_fr.php
-18c18
-< 	'champ_livraison_label' => 'Date de livraison',
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_amap.php ../plugins/fabrique_auto/.backup/amap/base/amap.php ../plugins/fabrique_auto/amap/base/amap.php
+102a103
+> 			'montant_total'      => 'text NOT NULL DEFAULT ""',
+106d106
+< 			'montant_total'      => 'text NOT NULL DEFAULT ""',
+115,116c115,116
+< 		'champs_editables'  => array('nom', 'adresse', 'mail', 'telephone', 'coadherent', 'taille_panier', 'tarif_solidaire', 'mode_paiement', 'date_debut', 'nb_cheques', 'montant_cheque_1', 'montant_cheque_2', 'montant_cheque_2', 'montant_cheque_3', 'montant_cheque_4', 'montant_cheque_5', 'montant_cheque_6', 'montant_cheque_7', 'montant_cheque_8', 'montant_cheque_9', 'montant_cheque_10', 'montant_cheque_11', 'montant_cheque_12', 'contrat_ok', 'paiement_ok', 'notes', 'montant_total', 'id_amap'),
+< 		'champs_versionnes' => array('nom', 'adresse', 'mail', 'telephone', 'coadherent', 'taille_panier', 'tarif_solidaire', 'mode_paiement', 'date_debut', 'nb_cheques', 'montant_cheque_1', 'montant_cheque_2', 'montant_cheque_2', 'montant_cheque_3', 'montant_cheque_4', 'montant_cheque_5', 'montant_cheque_6', 'montant_cheque_7', 'montant_cheque_8', 'montant_cheque_9', 'montant_cheque_10', 'montant_cheque_11', 'montant_cheque_12', 'contrat_ok', 'paiement_ok', 'notes', 'montant_total', 'id_amap'),
 ---
-> 	'champ_livraison_label' => 'Date',
+> 		'champs_editables'  => array('nom', 'adresse', 'mail', 'telephone', 'coadherent', 'taille_panier', 'tarif_solidaire', 'mode_paiement', 'date_debut', 'nb_cheques', 'montant_cheque_1', 'montant_cheque_2', 'montant_cheque_2', 'montant_cheque_3', 'montant_cheque_4', 'montant_cheque_5', 'montant_cheque_6', 'montant_cheque_7', 'montant_cheque_8', 'montant_cheque_9', 'montant_cheque_10', 'montant_cheque_11', 'montant_cheque_12', 'montant_total', 'contrat_ok', 'paiement_ok', 'notes', 'id_amap'),
+> 		'champs_versionnes' => array('nom', 'adresse', 'mail', 'telephone', 'coadherent', 'taille_panier', 'tarif_solidaire', 'mode_paiement', 'date_debut', 'nb_cheques', 'montant_cheque_1', 'montant_cheque_2', 'montant_cheque_2', 'montant_cheque_3', 'montant_cheque_4', 'montant_cheque_5', 'montant_cheque_6', 'montant_cheque_7', 'montant_cheque_8', 'montant_cheque_9', 'montant_cheque_10', 'montant_cheque_11', 'montant_cheque_12', 'montant_total', 'contrat_ok', 'paiement_ok', 'notes', 'id_amap'),
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_amap.php ../plugins/fabrique_auto/.backup/amap/formulaires/editer_adherent.html ../plugins/fabrique_auto/amap/formulaires/editer_adherent.html
+109a110,112
+> 			[(#SAISIE{input, montant_total,
+> 				label=<:adherent:champ_montant_total_label:>})]
+>
+123,125d125
+<
+< 			[(#SAISIE{input, montant_total,
+< 				label=<:adherent:champ_montant_total_label:>})]
 diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_amap.php ../plugins/fabrique_auto/.backup/amap/paquet.xml ../plugins/fabrique_auto/amap/paquet.xml
 12c12
-< 		Paquet généré le 2020-10-20 08:38:48
+< 		Paquet généré le 2020-10-28 12:20:26
 ---
-> 		Paquet généré le 2020-10-20 08:48:32
+> 		Paquet généré le 2020-10-28 12:23:52
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_amap.php ../plugins/fabrique_auto/.backup/amap/prive/objets/contenu/adherent.html ../plugins/fabrique_auto/amap/prive/objets/contenu/adherent.html
+116a117,121
+> [<div class="champ contenu_montant_total[ (#MONTANT_TOTAL*|strlen|?{'',vide})]">
+> 	<label><:adherent:champ_montant_total_label:> : </label>
+> 	<span dir="#LANG_DIR" class="#EDIT{montant_total} montant_total">(#MONTANT_TOTAL)</span>
+> </div>]
+>
+130,134d134
+< </div>]
+<
+< [<div class="champ contenu_montant_total[ (#MONTANT_TOTAL*|strlen|?{'',vide})]">
+< 	<label><:adherent:champ_montant_total_label:> : </label>
+< 	<span dir="#LANG_DIR" class="#EDIT{montant_total} montant_total">(#MONTANT_TOTAL)</span>

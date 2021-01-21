@@ -2,7 +2,7 @@
 
 /**
  *  Fichier généré par la Fabrique de plugin v6
- *   le 2020-10-20 08:48:32
+ *   le 2020-10-28 12:23:52
  *
  *  Ce fichier de sauvegarde peut servir à recréer
  *  votre plugin avec le plugin «Fabrique» qui a servi à le créer.
@@ -405,7 +405,7 @@ $data = array (
           'explication' => '',
           'saisie_options' => 'datas=[(#ARRAY{petit,petit,moyen,moyen,grand,grand})]',
         ),
-        7 => 
+        6 => 
         array (
           'nom' => 'Tarif solidaire',
           'champ' => 'tarif_solidaire',
@@ -420,7 +420,7 @@ $data = array (
           'explication' => 'Indiquer le montant payé dans les commentaires',
           'saisie_options' => 'datas=[(#ARRAY{1,oui,0,non})]',
         ),
-        8 => 
+        7 => 
         array (
           'nom' => 'Mode de paiement',
           'champ' => 'mode_paiement',
@@ -436,7 +436,7 @@ $data = array (
           'explication' => '',
           'saisie_options' => 'datas=[(#ARRAY{cheque,cheque,espece,espece,virement,virement})], autocomplete=on, defaut=cheque',
         ),
-        9 => 
+        8 => 
         array (
           'nom' => 'Date d\'inscription',
           'champ' => 'date_debut',
@@ -452,7 +452,7 @@ $data = array (
           'explication' => '',
           'saisie_options' => 'defaut=#ENV{date}',
         ),
-        10 => 
+        9 => 
         array (
           'nom' => 'Nombre de chèques',
           'champ' => 'nb_cheques',
@@ -467,10 +467,25 @@ $data = array (
           'explication' => '',
           'saisie_options' => 'type=number, afficher_si="@mode_paiement@==\'cheque""',
         ),
-        11 => 
+        10 => 
         array (
           'nom' => 'Montant chèque 1',
           'champ' => 'montant_cheque_1',
+          'sql' => 'text NOT NULL DEFAULT \'\'',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'versionne',
+          ),
+          'recherche' => '',
+          'saisie' => 'input',
+          'explication' => '',
+          'saisie_options' => 'type=number',
+        ),
+        11 => 
+        array (
+          'nom' => 'Montant chèque 2',
+          'champ' => 'montant_cheque_2',
           'sql' => 'text NOT NULL DEFAULT \'\'',
           'caracteristiques' => 
           array (
@@ -499,21 +514,6 @@ $data = array (
         ),
         13 => 
         array (
-          'nom' => 'Montant chèque 2',
-          'champ' => 'montant_cheque_2',
-          'sql' => 'text NOT NULL DEFAULT \'\'',
-          'caracteristiques' => 
-          array (
-            0 => 'editable',
-            1 => 'versionne',
-          ),
-          'recherche' => '',
-          'saisie' => 'input',
-          'explication' => '',
-          'saisie_options' => 'type=number',
-        ),
-        14 => 
-        array (
           'nom' => 'Montant chèque 3',
           'champ' => 'montant_cheque_3',
           'sql' => 'text NOT NULL DEFAULT \'\'',
@@ -527,7 +527,7 @@ $data = array (
           'explication' => '',
           'saisie_options' => 'type=number',
         ),
-        15 => 
+        14 => 
         array (
           'nom' => 'Montant chèque 4',
           'champ' => 'montant_cheque_4',
@@ -542,7 +542,7 @@ $data = array (
           'explication' => '',
           'saisie_options' => 'type=number',
         ),
-        16 => 
+        15 => 
         array (
           'nom' => 'Montant chèque 5',
           'champ' => 'montant_cheque_5',
@@ -557,7 +557,7 @@ $data = array (
           'explication' => '',
           'saisie_options' => 'type=number',
         ),
-        17 => 
+        16 => 
         array (
           'nom' => 'Montant chèque 6',
           'champ' => 'montant_cheque_6',
@@ -572,7 +572,7 @@ $data = array (
           'explication' => '',
           'saisie_options' => 'type=number',
         ),
-        18 => 
+        17 => 
         array (
           'nom' => 'Montant chèque 7',
           'champ' => 'montant_cheque_7',
@@ -587,7 +587,7 @@ $data = array (
           'explication' => '',
           'saisie_options' => 'type=number',
         ),
-        19 => 
+        18 => 
         array (
           'nom' => 'Montant chèque 8',
           'champ' => 'montant_cheque_8',
@@ -602,7 +602,7 @@ $data = array (
           'explication' => '',
           'saisie_options' => 'type=number',
         ),
-        20 => 
+        19 => 
         array (
           'nom' => 'Montant chèque 9',
           'champ' => 'montant_cheque_9',
@@ -617,7 +617,7 @@ $data = array (
           'explication' => '',
           'saisie_options' => 'type=number',
         ),
-        21 => 
+        20 => 
         array (
           'nom' => 'Montant chèque 10',
           'champ' => 'montant_cheque_10',
@@ -632,7 +632,7 @@ $data = array (
           'explication' => '',
           'saisie_options' => 'type=number',
         ),
-        22 => 
+        21 => 
         array (
           'nom' => 'Montant chèque 11',
           'champ' => 'montant_cheque_11',
@@ -647,7 +647,7 @@ $data = array (
           'explication' => '',
           'saisie_options' => 'type=number',
         ),
-        23 => 
+        22 => 
         array (
           'nom' => 'Montant chèque 12',
           'champ' => 'montant_cheque_12',
@@ -661,6 +661,21 @@ $data = array (
           'saisie' => 'input',
           'explication' => '',
           'saisie_options' => 'type=number',
+        ),
+        23 => 
+        array (
+          'nom' => 'Montant total',
+          'champ' => 'montant_total',
+          'sql' => 'text NOT NULL DEFAULT \'\'',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'versionne',
+          ),
+          'recherche' => '',
+          'saisie' => 'input',
+          'explication' => '',
+          'saisie_options' => '',
         ),
         24 => 
         array (

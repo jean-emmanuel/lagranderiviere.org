@@ -27,9 +27,11 @@
   saisie, input,
   options, #ARRAY{
     nom, #VAL{montant_cheque_}|concat{#VALEUR},
+    type, number,
     label, #VAL{Montant chèque }|concat{#VALEUR},
     afficher_si, #VAL{"@nb_cheques@ >= "}|concat{#VALEUR},
-    conteneur_class, #GET{classe}
+    conteneur_class, #GET{classe},
+    attributs, 'step="any" min="0"'
 
   }
 }}}
@@ -160,9 +162,21 @@
               options, #ARRAY{
                 nom, test,
                 afficher_si, '@mode_paiement@ == "cheque"',
-                conteneur_class, sous-groupe,
+                conteneur_class, sous-groupe montants,
               },
-              saisies, #GET{montants_cheques}
+              saisies, #GET{montants_cheques}|push{
+                  #ARRAY{
+                    saisie, input,
+                    options, #ARRAY{
+                      nom, montant_total,
+                      label, Montant total,
+                      explication, #GET{explications}|table_valeur{montant_total},
+                      type, texte,
+                      disable, oui,
+                      placeholder, 0
+                    }
+                  },
+              }
             },
             #ARRAY{
               saisie, radio,

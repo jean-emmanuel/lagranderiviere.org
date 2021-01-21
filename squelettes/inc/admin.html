@@ -1,5 +1,14 @@
 #SET{id_amap, 0}
 
+<div class="infos card">
+<BOUCLE_total_adherents(ADHERENTS){coadherent == 0}> </BOUCLE_total_adherents>
+Total paniers (Inter-Amap) : #TOTAL_BOUCLE
+</B_total_adherents>
+<BOUCLE_total_adherents_amap(ADHERENTS){si #ID_AMAP|oui}{id_amap=#ID_AMAP}{coadherent == 0}> </BOUCLE_total_adherents_amap>
+<br/>Total paniers (<BOUCLE_total_amap_nom(AMAPS){id_amap=#ID_AMAP}>#NOM</BOUCLE_total_amap_nom>) : #TOTAL_BOUCLE
+</B_total_adherents_amap>
+</div>
+
 <nav class="admin-head">
 	<ul>
 	<B_amap_select>
@@ -18,7 +27,12 @@
 		</form>
 	</li>
 	[(#GET{id_amap}|oui)
-		<li><a href="[(#SELF|parametre_url{id_adherent, ''}|parametre_url{ajouter_adherent, ''}|parametre_url{supprimer_adherent, ''})]" class="button [(#ENV{id_adherent}|ou{#ENV{ajouter_adherent}}|non)disabled]">Éditer l'AMAP</a></li>
+		<li>
+			<a href="[(#SELF|parametre_url{id_adherent, ''}|parametre_url{ajouter_adherent, ''}|parametre_url{supprimer_adherent, ''})]" class="button [(#ENV{id_adherent}|ou{#ENV{ajouter_adherent}}|non)disabled]">
+				[(#SESSION{statut}|=={0minirezo}|oui)Infos AMAP]
+				[(#SESSION{statut}|=={0minirezo}|non)Infos Référent]
+			</a>
+		</li>
 	]
 	<li><a class="button dialog-trigger" data-dialog="export-dialog" href="[(#URL_PAGE{exporter_adherents}|parametre_url{id_amap, #GET{id_amap}|=={0}|?{'', #GET{id_amap}}})]">Exporter</a></li>
 	<div class="spacer"></div>
@@ -28,16 +42,18 @@
 	</ul>
 </nav>
 
-<dialog id="export-dialog">
-	<div class="header">
-	Choisissez votre format d'export
+<div class="dialog" id="export-dialog">
+	<div class="content">
+		<div class="header">
+		Choisissez votre format d'export
+		</div>
+		<div class="actions">
+			<a class="button dialog-close accent" data-dialog="export-dialog" href="[(#URL_PAGE{exporter_adherents}|parametre_url{format, csv}|parametre_url{id_amap, #GET{id_amap}|=={0}|?{'', #GET{id_amap}}})]">ODS</a>
+			<a class="button dialog-close accent valid" data-dialog="export-dialog" href="[(#URL_PAGE{exporter_adherents}|parametre_url{format, xls}|parametre_url{id_amap, #GET{id_amap}|=={0}|?{'', #GET{id_amap}}})]">Excel</a>
+			<a class="button dialog-close" data-dialog="export-dialog" href="#">Annuler</a>
+		</div>
 	</div>
-	<div class="actions">
-		<a class="button dialog-close accent" data-dialog="export-dialog" href="[(#URL_PAGE{exporter_adherents}|parametre_url{format, csv}|parametre_url{id_amap, #GET{id_amap}|=={0}|?{'', #GET{id_amap}}})]">CSV</a>
-		<a class="button dialog-close accent valid" data-dialog="export-dialog" href="[(#URL_PAGE{exporter_adherents}|parametre_url{format, xls}|parametre_url{id_amap, #GET{id_amap}|=={0}|?{'', #GET{id_amap}}})]">XLS</a>
-		<a class="button dialog-close" data-dialog="export-dialog">Annuler</a>
-	</div>
-</dialog>
+</div>
 
 
 <BOUCLE_amap(AMAPS){id_amap=#GET{id_amap}}>

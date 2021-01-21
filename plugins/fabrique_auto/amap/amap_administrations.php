@@ -42,7 +42,7 @@ function amap_upgrade($nom_meta_base_version, $version_cible) {
 **/
 function amap_vider_tables($nom_meta_base_version) {
 
-	sql_drop_table('spip_amaps');
+	// sql_drop_table('spip_amaps');
 	sql_drop_table('spip_adherents');
 
 	# Nettoyer les liens courants (le génie optimiser_base_disparus se chargera de nettoyer toutes les tables de liens)

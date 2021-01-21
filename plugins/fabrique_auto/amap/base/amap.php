@@ -100,6 +100,7 @@ function amap_declarer_tables_objets_sql($tables) {
 			'montant_cheque_10'  => 'text NOT NULL DEFAULT ""',
 			'montant_cheque_11'  => 'text NOT NULL DEFAULT ""',
 			'montant_cheque_12'  => 'text NOT NULL DEFAULT ""',
+			'montant_total'      => 'text NOT NULL DEFAULT ""',
 			'contrat_ok'         => 'tinytext NOT NULL DEFAULT ""',
 			'paiement_ok'        => 'tinytext NOT NULL DEFAULT ""',
 			'notes'              => 'text NOT NULL DEFAULT ""',
@@ -111,8 +112,8 @@ function amap_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => 'nom AS titre, "" AS lang',
 		 #'date' => '',
-		'champs_editables'  => array('nom', 'adresse', 'mail', 'telephone', 'coadherent', 'taille_panier', 'tarif_solidaire', 'mode_paiement', 'date_debut', 'nb_cheques', 'montant_cheque_1', 'montant_cheque_2', 'montant_cheque_2', 'montant_cheque_3', 'montant_cheque_4', 'montant_cheque_5', 'montant_cheque_6', 'montant_cheque_7', 'montant_cheque_8', 'montant_cheque_9', 'montant_cheque_10', 'montant_cheque_11', 'montant_cheque_12', 'contrat_ok', 'paiement_ok', 'notes', 'id_amap'),
-		'champs_versionnes' => array('nom', 'adresse', 'mail', 'telephone', 'coadherent', 'taille_panier', 'tarif_solidaire', 'mode_paiement', 'date_debut', 'nb_cheques', 'montant_cheque_1', 'montant_cheque_2', 'montant_cheque_2', 'montant_cheque_3', 'montant_cheque_4', 'montant_cheque_5', 'montant_cheque_6', 'montant_cheque_7', 'montant_cheque_8', 'montant_cheque_9', 'montant_cheque_10', 'montant_cheque_11', 'montant_cheque_12', 'contrat_ok', 'paiement_ok', 'notes', 'id_amap'),
+		'champs_editables'  => array('nom', 'adresse', 'mail', 'telephone', 'coadherent', 'taille_panier', 'tarif_solidaire', 'mode_paiement', 'date_debut', 'nb_cheques', 'montant_cheque_1', 'montant_cheque_2', 'montant_cheque_2', 'montant_cheque_3', 'montant_cheque_4', 'montant_cheque_5', 'montant_cheque_6', 'montant_cheque_7', 'montant_cheque_8', 'montant_cheque_9', 'montant_cheque_10', 'montant_cheque_11', 'montant_cheque_12', 'montant_total', 'contrat_ok', 'paiement_ok', 'notes', 'id_amap'),
+		'champs_versionnes' => array('nom', 'adresse', 'mail', 'telephone', 'coadherent', 'taille_panier', 'tarif_solidaire', 'mode_paiement', 'date_debut', 'nb_cheques', 'montant_cheque_1', 'montant_cheque_2', 'montant_cheque_2', 'montant_cheque_3', 'montant_cheque_4', 'montant_cheque_5', 'montant_cheque_6', 'montant_cheque_7', 'montant_cheque_8', 'montant_cheque_9', 'montant_cheque_10', 'montant_cheque_11', 'montant_cheque_12', 'montant_total', 'contrat_ok', 'paiement_ok', 'notes', 'id_amap'),
 		'rechercher_champs' => array(),
 		'tables_jointures'  => array(),
 

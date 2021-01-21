@@ -1,5 +1,3 @@
-<!-- exporter_csv -->
-
 #SET{admin_amap, #ARRAY}
 <BOUCLE_amap_select(AMAPS){id_auteur=#SESSION{id_auteur}}{id_amap?}>
 #SET{admin_amap, #GET{admin_amap}|push{#ID_AMAP}}
@@ -75,6 +73,5 @@ _: [(#GET{head}|print)]
 [(#GET{adherents}|print)]
 [(#GET{data}|print)]
 ]
-
 
 [(#VAL{#ENV{date}|affdate{Y-m-d}|concat{_AdherentsAmap_}|concat{#GET{admin_amap_nom}}}|export_csv{#GET{data}, #ENV{format}|=={csv}|?{",",";"}, #GET{head}, 1})]

@@ -114,6 +114,11 @@
 	<span dir="#LANG_DIR" class="#EDIT{montant_cheque_12} montant_cheque_12">(#MONTANT_CHEQUE_12)</span>
 </div>]
 
+[<div class="champ contenu_montant_total[ (#MONTANT_TOTAL*|strlen|?{'',vide})]">
+	<label><:adherent:champ_montant_total_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{montant_total} montant_total">(#MONTANT_TOTAL)</span>
+</div>]
+
 [<div class="champ contenu_contrat_ok[ (#CONTRAT_OK*|strlen|?{'',vide})]">
 	<label><:adherent:champ_contrat_ok_label:> : </label>
 	<span dir="#LANG_DIR" class="#EDIT{contrat_ok} contrat_ok">(#CONTRAT_OK)</span>

@@ -5,7 +5,16 @@ if (!m.val()) m.val('cheque')
 // empecher validation du formulaire quand on appuie sur entrer
 $('#champ_nb_cheques').on('keydown', function(e){
     if (event.keyCode == 13) {e.preventDefault(); this.blur()}
+}).on('change', function(e){
+    $('.editer_montant_cheque input').slice($(this).val(), 12).val("")
 })
+
+// $('input[type="number"]').on('keydown', function(e){
+//     if (e.keyCode === 188) {
+//         console.log(this.value)
+//         e.preventDefault()
+//     }
+// })
 
 // vider le "taille du panier" si coadhérent est précisé
 $('#champ_coadherent').on('change', function(e){
@@ -22,6 +31,15 @@ $('.editer_montant_cheque').each(function(i){
         $('.editer_montant_cheque input').slice(i, $('#champ_nb_cheques').val()).val(_this.find('input').val())
     })
 })
+
+$('.sous-groupe.montants').on('change', function(){
+    var total = 0
+    $('.editer_montant_cheque input').each(function(){
+        total += parseFloat(this.value || 0)
+    })
+    $('#champ_montant_total').val(total)
+})
+$('.sous-groupe.montants').trigger('change')
 
 function verifier_afficher_si(form, saisie, chargement) {
     // spip override

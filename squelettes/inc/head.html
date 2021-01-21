@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="[(#CSS{css/styles.css})]" type="text/css">
 	<link rel="stylesheet" href="[(#CSS{css/oembed.css})]" type="text/css">
 
-	<script src="#URL_PAGE{scripts.js}" type="text/javascript"></script>
+	[(#PAGE|=={admin}|ou{#ID_RUBRIQUE|=={2}}|oui)<script src="#URL_PAGE{scripts.js}" type="text/javascript"></script>]
 	[(#REM)<style>
 		[(#INCLURE{#CSS{css/styles.css}|supprimer_timestamp}minify_css)]
 	</style>]

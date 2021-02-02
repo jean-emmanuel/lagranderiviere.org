@@ -3,7 +3,7 @@
  * Gestion du formulaire de d'édition de adherent
  *
  * @plugin     Amap
- * @copyright  2020
+ * @copyright  2021
  * @author     Jean-Emmanuel Doucet
  * @licence    GNU/GPL v3
  * @package    SPIP\Amap\Formulaires
@@ -115,7 +115,7 @@ function formulaires_editer_adherent_verifier_dist($id_adherent = 'new', $id_ama
 		}
 	}
 
-	$erreurs += formulaires_editer_objet_verifier('adherent', $id_adherent, array('nom', 'adresse', 'mail', 'telephone', 'taille_panier', 'mode_paiement', 'date_debut', 'contrat_ok', 'paiement_ok', 'id_amap'));
+	$erreurs += formulaires_editer_objet_verifier('adherent', $id_adherent, array('nom', 'adresse', 'mail', 'taille_panier', 'mode_paiement', 'date_debut', 'contrat_ok', 'paiement_ok', 'id_amap'));
 
 	return $erreurs;
 }

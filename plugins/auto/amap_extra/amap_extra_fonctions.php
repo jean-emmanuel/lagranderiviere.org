@@ -42,7 +42,7 @@ function action_supprimer_adherent($arg=null) {
             'id_adherent=' . sql_quote($arg)
         );
         $error = 0;
-		if ($mailinglist != '') {
+		if ($ancien_mail != lire_config('amap_extra/ovh_fakemail') and $mailinglist != '') {
 			try {
 				$ovh->delete('/email/domain/' . lire_config('amap_extra/ovh_domain') . '/mailingList/' . $mailinglist . '/subscriber/' . $ancien_mail);
 			} catch (GuzzleHttp\Exception\ClientException $e) {

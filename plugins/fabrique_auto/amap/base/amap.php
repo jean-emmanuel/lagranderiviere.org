@@ -3,7 +3,7 @@
  * Déclarations relatives à la base de données
  *
  * @plugin     Amap
- * @copyright  2020
+ * @copyright  2021
  * @author     Jean-Emmanuel Doucet
  * @licence    GNU/GPL v3
  * @package    SPIP\Amap\Pipelines

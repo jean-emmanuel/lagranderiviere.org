@@ -29,7 +29,7 @@
     nom, #VAL{montant_cheque_}|concat{#VALEUR},
     type, number,
     label, #VAL{Montant chèque }|concat{#VALEUR},
-    afficher_si, #VAL{"@nb_cheques@ >= "}|concat{#VALEUR},
+    afficher_si, #VAL{"@mode_paiement@ == 'cheque' && @nb_cheques@ >= "}|concat{#VALEUR},
     conteneur_class, #GET{classe},
     attributs, 'step="any" min="0"'
 
@@ -39,6 +39,7 @@
 
 #SET{url_coadherent, #SELF|parametre_url{id_adherent, #COADHERENT}}
 #SET{texte_coadherent, #VAL{Les informations concernant le panier et le paiement doivent être renseignées uniquement sur la fiche de <a href="URL#admin">l'adhérent principal</a> indiqué ci-dessus.}|replace{URL, #GET{url_coadherent}}}
+#SET{texte_nomail, #VAL{Si l'adhérent n'a pas d'adresse mail indiquer nomail@lagranderiviere.org}}
 
 #SET{saisies,
   #LISTE{
@@ -91,13 +92,22 @@
 		type, email
 	  }
 	},
+    #ARRAY{
+      saisie, explication,
+      options, #ARRAY{
+        nom, nomail_explication,
+        texte, #GET{texte_nomail},
+        afficher_si, '@mail@ == ""',
+        conteneur_class, #MAIL|?{hide,show}
+      },
+    },
 	#ARRAY{
 	  saisie, telephone,
 	  options, #ARRAY{
 		nom, telephone,
 		label, #GET{labels}|table_valeur{telephone},
 		explication, #GET{explications}|table_valeur{telephone},
-		obligatoire, oui,
+		obligatoire, non,
 	  },
 	},
     #ARRAY{
@@ -107,6 +117,7 @@
         label, #GET{labels}|table_valeur{coadherent},
         explication, #GET{explications}|table_valeur{coadherent} ,
         obligatoire, non,
+       	env, oui
       },
     },
     #ARRAY{
@@ -161,21 +172,18 @@
               saisie, fieldset,
               options, #ARRAY{
                 nom, test,
-                afficher_si, '@mode_paiement@ == "cheque"',
                 conteneur_class, sous-groupe montants,
               },
-              saisies, #GET{montants_cheques}|push{
-                  #ARRAY{
-                    saisie, input,
-                    options, #ARRAY{
-                      nom, montant_total,
-                      label, Montant total,
-                      explication, #GET{explications}|table_valeur{montant_total},
-                      type, texte,
-                      disable, oui,
-                      placeholder, 0
-                    }
-                  },
+              saisies, #GET{montants_cheques}
+            },
+            #ARRAY{
+              saisie, input,
+              options, #ARRAY{
+                nom, montant_total,
+                label, Montant total (€),
+                explication, #GET{explications}|table_valeur{montant_total},
+                type, texte,
+                placeholder, 0
               }
             },
             #ARRAY{

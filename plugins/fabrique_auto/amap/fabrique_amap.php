@@ -2,7 +2,7 @@
 
 /**
  *  Fichier généré par la Fabrique de plugin v6
- *   le 2020-10-28 12:23:52
+ *   le 2021-02-02 08:45:34
  *
  *  Ce fichier de sauvegarde peut servir à recréer
  *  votre plugin avec le plugin «Fabrique» qui a servi à le créer.
@@ -367,7 +367,6 @@ $data = array (
           array (
             0 => 'editable',
             1 => 'versionne',
-            2 => 'obligatoire',
           ),
           'recherche' => '',
           'saisie' => 'telephone',
@@ -664,7 +663,7 @@ $data = array (
         ),
         23 => 
         array (
-          'nom' => 'Montant total',
+          'nom' => 'Montant total (€)',
           'champ' => 'montant_total',
           'sql' => 'text NOT NULL DEFAULT \'\'',
           'caracteristiques' => 

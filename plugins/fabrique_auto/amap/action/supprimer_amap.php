@@ -3,7 +3,7 @@
  * Utilisation de l'action supprimer pour l'objet amap
  *
  * @plugin     Amap
- * @copyright  2020
+ * @copyright  2021
  * @author     Jean-Emmanuel Doucet
  * @licence    GNU/GPL v3
  * @package    SPIP\Amap\Action

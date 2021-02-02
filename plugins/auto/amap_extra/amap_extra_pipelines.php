@@ -27,12 +27,12 @@ function amap_extra_formulaire_verifier($flux){
 			$flux['data']['mail'] = 'Cette adresse email n\'est pas valide.';
 		} else if (intval(_request('id_adherent')) == 0) {
 			#Un adherent existe deja avec cette adresse ?
-			if (sql_countsel('spip_adherents', 'mail=' . sql_quote(_request('mail')) . ' AND id_amap=' . sql_quote(_request('id_amap'))) > 0) {
+			if (_request('mail') != lire_config('amap_extra/ovh_fakemail') and sql_countsel('spip_adherents', 'mail=' . sql_quote(_request('mail')) . ' AND id_amap=' . sql_quote(_request('id_amap'))) > 0) {
 				$flux['data']['mail'] = _T('erreur_email_deja_existant');
 			}
 		} else {
 			#Un adherent existe deja avec cette adresse ? et n'est pas l'adherent courant.
-			if ((sql_countsel(
+			if (_request('mail') != lire_config('amap_extra/ovh_fakemail') and (sql_countsel(
 				'spip_adherents',
 				'mail=' . sql_quote(_request('mail'))  . 'AND id_amap=' . sql_quote(_request('id_amap'))
 				) > 0) and (_request('id_adherent') != ($id_adherant_ancien = sql_getfetsel(
@@ -173,24 +173,28 @@ function amap_extra_pre_edition($flux){
 					'spip_amaps',
 					'id_amap=' . sql_quote($ancien_amap)
 				);
-				try {
-					$ovh->delete('/email/domain/' . lire_config('amap_extra/ovh_domain') . '/mailingList/' . $ancien_mailinglist . '/subscriber/' . $ancien_mail);
-				} catch (GuzzleHttp\Exception\ClientException $e) {
-					spip_log('OVH: suppression de mail echouée : ' . $ancien_mail, 'ovh' . _LOG_ERREUR);
-					spip_log($e->getResponse()->getBody()->getContents(), 'ovh' . _LOG_ERREUR);
+				if ($ancien_mail != lire_config('amap_extra/ovh_fakemail')){
+					try {
+						$ovh->delete('/email/domain/' . lire_config('amap_extra/ovh_domain') . '/mailingList/' . $ancien_mailinglist . '/subscriber/' . $ancien_mail);
+					} catch (GuzzleHttp\Exception\ClientException $e) {
+						spip_log('OVH: suppression de mail echouée : ' . $ancien_mail, 'ovh' . _LOG_ERREUR);
+						spip_log($e->getResponse()->getBody()->getContents(), 'ovh' . _LOG_ERREUR);
+					}
 				}
-				try {
-					$ovh->post('/email/domain/' . lire_config('amap_extra/ovh_domain') . '/mailingList/' . $mailinglist . '/subscriber/', array(
-						'email'=>$flux['data']['mail']
-					));
-				} catch (GuzzleHttp\Exception\ClientException $e) {
-					spip_log('OVH: ajout de mail echoué : ' . $flux['data']['mail'], 'ovh' . _LOG_ERREUR);
-					spip_log($e->getResponse()->getBody()->getContents(), 'ovh' . _LOG_ERREUR);
-					return false;
+				if ($flux['data']['mail'] != lire_config('amap_extra/ovh_fakemail')){
+					try {
+						$ovh->post('/email/domain/' . lire_config('amap_extra/ovh_domain') . '/mailingList/' . $mailinglist . '/subscriber/', array(
+							'email'=>$flux['data']['mail']
+						));
+					} catch (GuzzleHttp\Exception\ClientException $e) {
+						spip_log('OVH: ajout de mail echoué : ' . $flux['data']['mail'], 'ovh' . _LOG_ERREUR);
+						spip_log($e->getResponse()->getBody()->getContents(), 'ovh' . _LOG_ERREUR);
+						return false;
+					}
 				}
 			}
 
-		} else if ($id == '') {
+		} else if ($flux['data']['mail'] != lire_config('amap_extra/ovh_fakemail') and $id == '') {
 			// nouvel adherant -> ajouter mail dans la liste
 			try {
 				$ovh->post('/email/domain/' . lire_config('amap_extra/ovh_domain') . '/mailingList/' . $mailinglist . '/subscriber/', array(

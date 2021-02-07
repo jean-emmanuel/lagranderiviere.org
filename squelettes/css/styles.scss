@@ -103,14 +103,23 @@ img {
     margin: 0 auto;
     text-align: center;
     width: 100%!important;
+    &.small {
+        width: 40%!important;
+    }
 }
 .spip_documents_left {
         max-width: 40%;
         margin-right: var(--p-margin);
+        &.small {
+            width: 20%!important;
+        }
 }
 .spip_documents_right {
         max-width: 40%;
         margin-left: var(--p-margin);
+        &.small {
+            width: 20%!important;
+        }
 }
 dl.spip_documents {
     margin: 0 var(--p-margin) var(--p-margin);

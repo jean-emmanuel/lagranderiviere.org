@@ -58,9 +58,12 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.p
 }).addTo(map);
 
 
+L.control.scale({imperial: false}).addTo(map);
+
+
 var data = {<BOUCLE_amap_markers(AMAPS){gps != ''}{", "}>'[(#NOM|textebrut|replace{"'", &#39})]':[#GPS]</BOUCLE_amap_markers>}
     markers = {}
-    
+
 for (var name in data) {
     markers[name] = L.marker(data[name], {alt:name}).addTo(map)
         .on('click', function(){
@@ -75,6 +78,7 @@ $('[data-marker]').click(function(){
     $('.leaflet-marker-icon').removeClass('on')
     $('.leaflet-marker-icon[alt="'+$(this).attr('data-marker')+'"]').addClass('on')
     map.panInside(markers[$(this).attr('data-marker')]._latlng, {padding: [60, 60]})
+    $('#amap-tabs')[0].scrollIntoView({block: 'center', behavior: 'smooth'})
 })
 $('.leaflet-marker-icon').first().addClass('on')
 </script>

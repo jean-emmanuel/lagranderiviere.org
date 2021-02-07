@@ -77,6 +77,7 @@ h2 {
 h3 {
     font-size: 1.25em;
     margin: var(--p-margin) 0;
+    padding-top: var(--p-margin);
 }
 img {
     display: inline-block;
@@ -178,7 +179,7 @@ blockquote.spip_poesie {
     }
 }
 article {
-    .date, .date a {
+    .date, .date a, .ariane, .ariane a {
         color: var(--faded);
     }
     .notes {
@@ -216,6 +217,13 @@ article {
             }
         }
     }
+}
+
+.align-center {
+    text-align: center;
+}
+.align-right {
+    text-align: right;
 }
 
 

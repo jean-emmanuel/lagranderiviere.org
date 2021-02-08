@@ -1,0 +1,28 @@
+nom: 'une image'
+logo: 'images/media-24.png'
+icone_barre: 'media.png'
+parametres:
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'modele'
+      defaut: 'img'
+  -
+    saisie: 'selecteur_document'
+    options:
+      nom: 'id_modele'
+      label: '<:inserer_modeles:label_id_document:>'
+      defaut: ''
+      env: 'oui'
+    verifier:
+      type: 'id_document'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'align'
+      label: '<:inserer_modeles:label_alignement:>'
+      defaut: ''
+      datas:
+        left: '<:inserer_modeles:item_left:>'
+        center: '<:inserer_modeles:item_center:>'
+        right: '<:inserer_modeles:item_right:>'

@@ -1,3 +1,12 @@
+#SET{id_article, #URL|match{^article(\d+)$, 1}}
+#SET{id_rubrique, #URL|match{^rubrique(\d+)$, 1}}
+#SET{id_doc, #URL|match{^(img|doc)(\d+)$, 2}}
+#SET{url, #URL}
+[(#GET{id_article}|oui)#SET{url, #URL_ARTICLE{#GET{id_article}}}]
+[(#GET{id_rubrique}|oui)#SET{url, #URL_RUBRIQUE{#GET{id_rubrique}}}]
+[(#GET{id_doc}|oui)#SET{url, #URL_DOCUMENT{#GET{id_doc}}}]
+
+
 <p class="align-[(#ALIGN|sinon{left})]">
-    <a href="#URL" class="button accent">[(#TEXTE|textebrut)]</a>
+    <a href="#GET{url}" class="button accent">[(#TEXTE|textebrut)]</a>
 </p>

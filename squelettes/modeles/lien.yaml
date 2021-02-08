@@ -1,0 +1,20 @@
+nom: 'Un cadre de lien'
+logo: 'images/lien-24.png'
+icone_barre: 'lien.png'
+parametres:
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'modele'
+      defaut: 'lien'
+  -
+    saisie: 'input'
+    options:
+      label: Texte du lien
+      nom: 'texte'
+
+  -
+    saisie: 'input'
+    options:
+      label: Adresse
+      nom: 'url'

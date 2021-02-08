@@ -8,7 +8,7 @@
     [(#REM)<p class="date">
         [(#DATE|affdate)]
     </p>]
-    <BOUCLE_rub(RUBRIQUES){id_rubrique=#ID_RUBRIQUE}>
+    <BOUCLE_rub(RUBRIQUES){id_rubrique=#ID_RUBRIQUE}{si #ENV{embed}|non}>
     <p class="ariane"><a href="#URL_RUBRIQUE">Revenir à "#TITRE"</a></p>
     </BOUCLE_rub>
 

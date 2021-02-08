@@ -2,7 +2,7 @@
 
 /**
  *  Fichier généré par la Fabrique de plugin v6
- *   le 2021-02-02 08:45:34
+ *   le 2021-02-08 21:31:27
  *
  *  Ce fichier de sauvegarde peut servir à recréer
  *  votre plugin avec le plugin «Fabrique» qui a servi à le créer.
@@ -36,7 +36,7 @@ $data = array (
     array (
       0 => '',
     ),
-    'version' => '1.0.1',
+    'version' => '1.0.2',
     'auteur' => 'Jean-Emmanuel Doucet',
     'auteur_lien' => '',
     'licence' => 'GNU/GPL v3',
@@ -722,6 +722,21 @@ $data = array (
           'saisie' => 'textarea',
           'explication' => '',
           'saisie_options' => 'rows=2',
+        ),
+        27 => 
+        array (
+          'nom' => 'Abandon en cours d\'année',
+          'champ' => 'abandon',
+          'sql' => 'tinytext NOT NULL DEFAULT \'\'',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'versionne',
+          ),
+          'recherche' => '',
+          'saisie' => 'radio',
+          'explication' => '',
+          'saisie_options' => 'datas=[(#ARRAY{1,oui,0,non})], defaut=1',
         ),
       ),
       'champ_titre' => 'nom',

@@ -1,7 +1,7 @@
 <paquet
 	prefix="amap"
 	categorie="divers"
-	version="1.0.1"
+	version="1.0.2"
 	etat="dev"
 	compatibilite="[3.2.8;3.2.*]"
 	logo=""
@@ -9,7 +9,7 @@
 	schema="1.0.0" 
 >
 	<!--
-		Paquet généré le 2021-02-02 08:45:34
+		Paquet généré le 2021-02-08 21:31:27
 	-->
 
 	<nom>Amap</nom>

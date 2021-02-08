@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_lien_adherent' => 'Ajouter ce adhérent',
 
 	// C
+	'champ_abandon_label' => 'Abandon en cours d\'année',
 	'champ_adresse_explication' => 'Adresse postale de l\'adhérent',
 	'champ_adresse_label' => 'Adresse',
 	'champ_coadherent_explication' => 'Indiquer l\'adhérent principal associé à cet adhérent',

@@ -1,5 +1,9 @@
 diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_amap.php ../plugins/fabrique_auto/.backup/amap/paquet.xml ../plugins/fabrique_auto/amap/paquet.xml
-12c12
-< 		Paquet généré le 2021-02-02 08:45:25
+4c4
+< 	version="1.0.1"
 ---
-> 		Paquet généré le 2021-02-02 08:45:34
+> 	version="1.0.2"
+12c12
+< 		Paquet généré le 2021-02-08 21:30:43
+---
+> 		Paquet généré le 2021-02-08 21:31:27

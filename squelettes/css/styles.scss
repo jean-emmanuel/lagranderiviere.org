@@ -374,7 +374,7 @@ main {
 
 .admin-head {
 
-    margin-bottom: 40px;
+    margin-bottom: var(--p-margin);
     ul {
         margin-left: -6px;
         margin-right: -6px;

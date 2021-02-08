@@ -1,11 +1,5 @@
 #SET{id_amap, 0}
 
-<BOUCLE_total_adherents(ADHERENTS){coadherent == 0}> </BOUCLE_total_adherents>
-<div class="infos card">
-Total paniers (Inter-Amap) : #TOTAL_BOUCLE
-</div>
-</B_total_adherents>
-
 <nav class="admin-head">
 	<ul>
 	<B_amap_select>
@@ -52,11 +46,18 @@ Total paniers (Inter-Amap) : #TOTAL_BOUCLE
 	</div>
 </div>
 
-<BOUCLE_total_adherents_amap(ADHERENTS){si #GET{id_amap}|oui}{id_amap=#ID_AMAP}{coadherent == 0}> </BOUCLE_total_adherents_amap>
 <div class="infos card">
-Total paniers (<BOUCLE_total_amap_nom(AMAPS){id_amap=#ID_AMAP}>#NOM</BOUCLE_total_amap_nom>) : #TOTAL_BOUCLE
-</div>
+
+#SET{total, 0}
+<BOUCLE_total_adherents(ADHERENTS)>[(#COADHERENT|non)#SET{total, #GET{total}|plus{1}}] </BOUCLE_total_adherents>
+Inter-Amap : #TOTAL_BOUCLE adhérents ([(#GET{total})] paniers)
+</B_total_adherents>
+
+#SET{total, 0}
+<BOUCLE_total_adherents_amap(ADHERENTS){si #GET{id_amap}|oui}{id_amap=#ID_AMAP}>[(#COADHERENT|non)#SET{total, #GET{total}|plus{1}}] </BOUCLE_total_adherents_amap>
+<br/><BOUCLE_total_amap_nom(AMAPS){id_amap=#ID_AMAP}>#NOM</BOUCLE_total_amap_nom> : #TOTAL_BOUCLE adhérents ([(#GET{total})] paniers)
 </B_total_adherents_amap>
+</div>
 
 
 <BOUCLE_amap(AMAPS){id_amap=#GET{id_amap}}>

@@ -49,13 +49,15 @@
 <div class="infos card">
 
 #SET{total, 0}
-<BOUCLE_total_adherents(ADHERENTS)>[(#COADHERENT|non)#SET{total, #GET{total}|plus{1}}] </BOUCLE_total_adherents>
-Inter-Amap : #TOTAL_BOUCLE adhérents ([(#GET{total})] paniers)
+#SET{totalm, 0}
+<BOUCLE_total_adherents(ADHERENTS)>[(#COADHERENT|non)#SET{total, #GET{total}|plus{1}} #SET{totalm, #GET{totalm}|plus{#TAILLE_PANIER|panier_moyen_equivalent}}] </BOUCLE_total_adherents>
+Inter-Amap : #TOTAL_BOUCLE adhérents ([(#GET{total})] paniers, [(#GET{totalm})] equivalents moyen)
 </B_total_adherents>
 
 #SET{total, 0}
-<BOUCLE_total_adherents_amap(ADHERENTS){si #GET{id_amap}|oui}{id_amap=#ID_AMAP}>[(#COADHERENT|non)#SET{total, #GET{total}|plus{1}}] </BOUCLE_total_adherents_amap>
-<br/><BOUCLE_total_amap_nom(AMAPS){id_amap=#ID_AMAP}>#NOM</BOUCLE_total_amap_nom> : #TOTAL_BOUCLE adhérents ([(#GET{total})] paniers)
+#SET{totalm, 0}
+<BOUCLE_total_adherents_amap(ADHERENTS){si #GET{id_amap}|oui}{id_amap=#ID_AMAP}>[(#COADHERENT|non)#SET{total, #GET{total}|plus{1}} #SET{totalm, #GET{totalm}|plus{#TAILLE_PANIER|panier_moyen_equivalent}}] </BOUCLE_total_adherents_amap>
+<br/><BOUCLE_total_amap_nom(AMAPS){id_amap=#ID_AMAP}>#NOM</BOUCLE_total_amap_nom> : #TOTAL_BOUCLE adhérents ([(#GET{total})] paniers, [(#GET{totalm})] equivalents moyen)
 </B_total_adherents_amap>
 </div>
 
@@ -113,3 +115,4 @@ Inter-Amap : #TOTAL_BOUCLE adhérents ([(#GET{total})] paniers)
 
 
 <script type="text/javascript">try{$('.liste-adherents tr.on')[0].scrollIntoView({block: 'center'})}catch(e){}</script>
+#CACHE{0}

@@ -20,6 +20,17 @@ $lightaccent:transparentize(#5E81AC, 0.75);
 }
 
 $lightaccent2:transparentize(#88C0D0, 0.75);
+.dark-mode {
+    --background: #2E3440;
+    --background-alt: #3B4252;
+    --text: #ECEFF4;
+    --faded: #D8DEE9;
+    --accent: #88C0D0;
+    --light-accent: #{$lightaccent2};
+    --border: #4C566A;
+}
+
+
 @media (prefers-color-scheme: dark) {
     :root {
         --background: #2E3440;
@@ -31,16 +42,6 @@ $lightaccent2:transparentize(#88C0D0, 0.75);
         --border: #4C566A;
     }
 }
-html.dark-mode {
-    --background: #2E3440;
-    --background-alt: #3B4252;
-    --text: #ECEFF4;
-    --faded: #D8DEE9;
-    --accent: #88C0D0;
-    --light-accent: #{$lightaccent2};
-    --border: #4C566A;
-}
-
 
 * {
     box-sizing: border-box;

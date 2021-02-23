@@ -125,9 +125,9 @@
 
     function panier_moyen_equivalent($taille) {
         if ($taille == 'petit') {
-            return 0.66;
+            return 0.78;
         } else if ($taille == 'grand') {
-            return 1.33;
+            return 1.41;
         } else {
             return 1.0;
         }

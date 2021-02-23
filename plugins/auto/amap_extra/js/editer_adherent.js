@@ -39,7 +39,9 @@ $('.sous-groupe.montants').on('change', function(){
     })
     $('#champ_montant_total').val(total)
 })
-$('.sous-groupe.montants').trigger('change')
+if ($('#champ_mode_paiement').val()=='cheque') {
+    $('.sous-groupe.montants').trigger('change')
+}
 
 function verifier_afficher_si(form, saisie, chargement) {
     // spip override

@@ -16,12 +16,14 @@
         label, #GET{labels}|table_valeur{nb_cheques},
         type, number,
         defaut, 12,
-        attributs, 'min="1" max="12"'
+        attributs, 'min="1" max="12"',
+        afficher_si, "@mode_paiement@ == 'cheque'",
+        conteneur_class, #MODE_PAIEMENT|=={cheque}|?{show, hide}
       }
     }
 }}
 <BOUCLE_montants(DATA){liste 1,2,3,4,5,6,7,8,9,10,11,12}>
-#SET{classe, #NB_CHEQUES|>={#VALEUR}|?{show, hide}}
+#SET{classe, #NB_CHEQUES|>={#VALEUR}|et{#MODE_PAIEMENT|=={cheque}}|?{show, hide}}
 #SET{classe, #GET{classe}|concat{" editer_montant_cheque"}}
 #SET{montants_cheques, #GET{montants_cheques}|push{#ARRAY{
   saisie, input,

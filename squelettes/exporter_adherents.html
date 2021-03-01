@@ -13,7 +13,7 @@
 </BOUCLE_amap>
 
 #SET{adherents, #ARRAY}
-#SET{adherents_nom, #ARRAY}
+#SET{adherents_nom, #ARRAY{_,''}}
 <BOUCLE_liste_adherents(ADHERENTS){id_amap IN #GET{admin_amap}}{par nom}>
 [(#COADHERENT|non)#SET{adherents, #GET{adherents}|push{#ID_ADHERENT}}]
 <BOUCLE_coadherents(ADHERENTS){coadherent == #ID_ADHERENT}{par nom}>

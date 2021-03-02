@@ -59,6 +59,10 @@
             #SET{value, #GET{adherents_nom}|table_valeur{_#GET{value}}}
         ]
 
+        [(#CLE|match{montant|tarif_solidaire|nb_cheque|paiement_ok|contrat_ok}|oui)
+            #SET{value, #GET{value}|replace{",","."}|floatval}
+        ]
+
         #SET{line, #GET{line}|push{#GET{value}}}
 
     ]

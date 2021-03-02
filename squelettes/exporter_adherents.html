@@ -15,11 +15,8 @@
 #SET{adherents, #ARRAY}
 #SET{adherents_nom, #ARRAY{_,''}}
 <BOUCLE_liste_adherents(ADHERENTS){id_amap IN #GET{admin_amap}}{par nom}>
-[(#COADHERENT|non)#SET{adherents, #GET{adherents}|push{#ID_ADHERENT}}]
-<BOUCLE_coadherents(ADHERENTS){coadherent == #ID_ADHERENT}{par nom}>
 #SET{adherents, #GET{adherents}|push{#ID_ADHERENT}}
-#SET{adherents_nom, #GET{adherents_nom}|array_merge{#ARRAY{_#COADHERENT, #_liste_adherents:NOM}}}
-</BOUCLE_coadherents>
+#SET{adherents_nom, #GET{adherents_nom}|array_merge{#ARRAY{_#ID_ADHERENT, #NOM}}}
 </BOUCLE_liste_adherents>
 
 #SET{head, #ARRAY}

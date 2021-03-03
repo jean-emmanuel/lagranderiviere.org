@@ -50,8 +50,13 @@
 
 #SET{total, 0}
 #SET{totalm, 0}
-<BOUCLE_total_adherents(ADHERENTS)>[(#COADHERENT|non)#SET{total, #GET{total}|plus{1}} #SET{totalm, #GET{totalm}|plus{#TAILLE_PANIER|panier_moyen_equivalent}}] </BOUCLE_total_adherents>
-Inter-Amap : #TOTAL_BOUCLE adhérents ([(#GET{total})] paniers, [(#GET{totalm})] equivalents moyen)
+#SET{totalm_lisse, 0} #SET{saison_fin, #CONFIG{amap_extra/saison_fin}|affdate{c}}
+<BOUCLE_total_adherents(ADHERENTS)>[(#COADHERENT|non)
+#SET{total, #GET{total}|plus{1}} #SET{totalm, #GET{totalm}|plus{#TAILLE_PANIER|panier_moyen_equivalent}}
+#SET{panier_lisse, #DATE_DEBUT|duree{#GET{saison_fin}}|div{7.0}|round|div{52.0}|mult{#TAILLE_PANIER|panier_moyen_equivalent}}
+#SET{totalm_lisse, #GET{totalm_lisse}|plus{#GET{panier_lisse}}}
+]</BOUCLE_total_adherents>
+Inter-Amap : #TOTAL_BOUCLE adhérents ([(#GET{total})] paniers, [(#GET{totalm})] equivalents moyen, ~[(#GET{totalm_lisse}|round)] eq. moyen lissés sur l'année)
 </B_total_adherents>
 
 #SET{total, 0}

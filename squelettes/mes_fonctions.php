@@ -133,4 +133,37 @@
         }
     }
 
+
+    function duree($date_debut,$date_fin) {
+      $d_debut = mktime(
+                  substr($date_debut,11,2),
+                  substr($date_debut,14,2),
+                  substr($date_debut,17,2),
+                  substr($date_debut,5,2),
+                  substr($date_debut,8,2),
+                  substr($date_debut,0,4));
+
+      $d_fin = mktime(
+                  substr($date_fin,11,2),
+                  substr($date_fin,14,2),
+                  substr($date_fin,17,2),
+                  substr($date_fin,5,2),
+                  substr($date_fin,8,2),
+                  substr($date_fin,0,4));
+
+      $diff_seconds  = $d_fin - $d_debut;
+
+      if ($diff_seconds<0) return "";
+
+      $diff_years    = floor($diff_seconds/31536000);
+      $diff_seconds -= $diff_years   * 31536000;
+      $diff_weeks    = floor($diff_seconds/604800);
+      $diff_seconds -= $diff_weeks   * 604800;
+      $diff_days     = floor($diff_seconds/86400);
+
+
+      return $diff_days + $diff_weeks * 7 + $diff_years * 365;
+
+    }
+
 ?>

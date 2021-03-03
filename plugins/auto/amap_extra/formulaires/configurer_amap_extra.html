@@ -12,7 +12,26 @@
 
 
 			<fieldset>
+				<legend>Configuration saison AMAP</legend>
+
+
+				[(#SAISIE{date,saison_debut,
+					label=Début de la saison})]
+
+				[(#SAISIE{date,saison_fin,
+					label=Fin de la saison})]
+
+				[(#SAISIE{date,saison_paniers,
+					label=Nombre de panier})]
+
+
+			</fieldset>
+
+
+			<fieldset>
 				<legend>Configuration OVH (mailing lists et redirections)</legend>
+
+
 
 			[(#SAISIE{input,ovh_domain,
 				label=Nom de domaine,

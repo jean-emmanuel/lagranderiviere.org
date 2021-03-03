@@ -68,3 +68,10 @@ function verifier_afficher_si(form, saisie, chargement) {
         saisie.find('[required]').attr('required', false).attr('data-afficher-si-required', null);
     }
 }
+
+
+// date range
+setTimeout(()=>{
+    $("#champ_date_debut").datepicker("option", "minDate", $("#date_range").attr('data-min'))
+    $("#champ_date_debut").datepicker("option", "maxDate", $("#date_range").attr('data-max'))
+},200)

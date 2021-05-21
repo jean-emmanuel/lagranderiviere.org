@@ -142,7 +142,7 @@ function amap_extra_pre_edition($flux){
 			'id_adherent=' . sql_quote($flux['args']['id_objet'])
 		);
 		$ovh = connect_ovh();
-
+                // spip_log('id: ' . $id . ', mail: ' . $flux['data']['mail'] . ', amap:' . $flux['data']['id_amap'], 'ovh' . _LOG_ERREUR);
 		if ($id != '' && (
 			$flux['data']['mail'] != sql_getfetsel(
 				'mail',
@@ -173,7 +173,7 @@ function amap_extra_pre_edition($flux){
 					'spip_amaps',
 					'id_amap=' . sql_quote($ancien_amap)
 				);
-				if ($ancien_mail != lire_config('amap_extra/ovh_fakemail')){
+				if ($ancien_mail != '' && $ancien_mail != lire_config('amap_extra/ovh_fakemail')){
 					try {
 						$ovh->delete('/email/domain/' . lire_config('amap_extra/ovh_domain') . '/mailingList/' . $ancien_mailinglist . '/subscriber/' . $ancien_mail);
 					} catch (GuzzleHttp\Exception\ClientException $e) {
@@ -181,7 +181,7 @@ function amap_extra_pre_edition($flux){
 						spip_log($e->getResponse()->getBody()->getContents(), 'ovh' . _LOG_ERREUR);
 					}
 				}
-				if ($flux['data']['mail'] != lire_config('amap_extra/ovh_fakemail')){
+				if ($flux['data']['mail'] != '' && $flux['data']['mail'] != lire_config('amap_extra/ovh_fakemail')){
 					try {
 						$ovh->post('/email/domain/' . lire_config('amap_extra/ovh_domain') . '/mailingList/' . $mailinglist . '/subscriber/', array(
 							'email'=>$flux['data']['mail']
@@ -194,7 +194,7 @@ function amap_extra_pre_edition($flux){
 				}
 			}
 
-		} else if ($flux['data']['mail'] != lire_config('amap_extra/ovh_fakemail') and $id == '') {
+		} else if ($flux['data']['mail'] != '' and $flux['data']['mail'] != lire_config('amap_extra/ovh_fakemail') and $id == '') {
 			// nouvel adherant -> ajouter mail dans la liste
 			try {
 				$ovh->post('/email/domain/' . lire_config('amap_extra/ovh_domain') . '/mailingList/' . $mailinglist . '/subscriber/', array(
